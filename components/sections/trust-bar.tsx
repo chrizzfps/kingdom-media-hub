@@ -3,9 +3,9 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Reveal } from "@/components/ui/reveal";
 import { stats } from "@/content/stats";
 
-const clientLogos = [
-  "Velox Tech", "Centro Médico Avanza", "Logística Sur", "Moda VE", "Rest Group", "TechStart",
-];
+// const clientLogos = [
+//   "Velox Tech", "Centro Médico Avanza", "Logística Sur", "Moda VE", "Rest Group", "TechStart",
+// ];
 
 export function TrustBar() {
   const t = useTranslations("trust");
@@ -37,8 +37,8 @@ export function TrustBar() {
           ))}
         </dl>
 
-        {/* Client logo strip */}
-        <Reveal delay={0.15}>
+        {/* Client logo strip (temporarily disabled) */}
+        {/* <Reveal delay={0.15}>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {clientLogos.map((name) => (
               <span
@@ -50,7 +50,7 @@ export function TrustBar() {
               </span>
             ))}
           </div>
-        </Reveal>
+        </Reveal> */}
       </div>
     </section>
   );

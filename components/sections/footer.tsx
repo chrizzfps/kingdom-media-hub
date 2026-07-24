@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { InstagramLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { KingdomLogo } from "@/components/ui/kingdom-logo";
+import { whatsappLink } from "@/lib/env";
 
 const ecosystem = [
   { key: "agency", href: "#agency" },
@@ -11,7 +12,8 @@ const ecosystem = [
 const company = [
   { key: "results", href: "#results" },
   { key: "faq", href: "#faq" },
-  { key: "getStarted", href: "#contact" },
+  // Contact form backend not wired up yet — send to WhatsApp for now.
+  { key: "getStarted", href: whatsappLink() ?? "#contact" },
 ] as const;
 
 const socials = [

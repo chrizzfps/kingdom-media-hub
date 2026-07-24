@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { ArrowRight, WhatsappLogo, CalendarCheck } from "@phosphor-icons/react";
+import { ArrowRight, WhatsappLogo, CalendarCheck, EnvelopeSimple, Phone } from "@phosphor-icons/react";
 import { contactSchema, type ContactInput, revenueBands, projectTypes } from "@/lib/validations";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CTAButton } from "@/components/ui/cta-button";
@@ -82,6 +82,23 @@ export function Contact() {
                 {tc("bookConsultation")}
               </CTAButton>
             </div>
+
+            <div className="mt-8 flex flex-col gap-3 border-t border-edge pt-6">
+              <a
+                href="mailto:contact@kingdommediahub.com"
+                className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-ink"
+              >
+                <EnvelopeSimple size={18} className="shrink-0 text-cyan" />
+                <span>{t("direct.email")}: contact@kingdommediahub.com</span>
+              </a>
+              <a
+                href="tel:+34711251968"
+                className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-ink"
+              >
+                <Phone size={18} className="shrink-0 text-cyan" />
+                <span>{t("direct.phone")}: +34 711 251 968</span>
+              </a>
+            </div>
           </div>
 
           {/* Form */}
@@ -124,7 +141,7 @@ export function Contact() {
                     <Input {...register("email")} type="email" placeholder="hola@empresa.com" error={!!errors.email} />
                   </Field>
                   <Field label={t("form.phone")} error={errors.phone?.message}>
-                    <Input {...register("phone")} placeholder="+1 555 000 0000" error={!!errors.phone} />
+                    <Input {...register("phone")} placeholder="+34 711 251 968" error={!!errors.phone} />
                   </Field>
                 </div>
                 {/* Project type */}

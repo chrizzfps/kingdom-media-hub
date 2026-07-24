@@ -8,14 +8,16 @@ import { routing } from "@/i18n/routing";
 import { CTAButton } from "@/components/ui/cta-button";
 import { KingdomLogo } from "@/components/ui/kingdom-logo";
 import { trackEvent } from "@/lib/analytics";
+import { whatsappLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { id: "#agency",    key: "agency"   },
-  { id: "#media-lab", key: "mediaLab" },
-  { id: "#academy",   key: "academy"  },
-  { id: "#results",   key: "results"  },
-  { id: "#faq",       key: "faq"      },
+  { id: "#agency",    key: "agency"    },
+  { id: "#media-lab", key: "mediaLab"  },
+  { id: "#marketing", key: "marketing" },
+  { id: "#academy",   key: "academy"   },
+  { id: "#results",   key: "results"   },
+  { id: "#faq",       key: "faq"       },
 ] as const;
 
 export function Navbar() {
@@ -68,7 +70,7 @@ export function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <LocaleToggle />
           <CTAButton
-            href="#contact"
+            href={whatsappLink() ?? "#contact"}
             variant="primary"
             size="sm"
             onClick={() => trackEvent("cta_growth_audit", { location: "navbar" })}
@@ -107,7 +109,7 @@ export function Navbar() {
           <div className="mt-4 flex items-center justify-between gap-3 border-t border-edge pt-4">
             <LocaleToggle />
             <CTAButton
-              href="#contact"
+              href={whatsappLink() ?? "#contact"}
               variant="primary"
               className="flex-1"
               onClick={() => { setOpen(false); trackEvent("cta_growth_audit", { location: "mobile_menu" }); }}

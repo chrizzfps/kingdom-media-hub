@@ -3,10 +3,10 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 
-const clientLogos = [
-  "Velox Tech", "C. Médico Avanza", "Logística Sur",
-  "Moda VE", "Rest Group", "TechStart",
-];
+// const clientLogos = [
+//   "Velox Tech", "C. Médico Avanza", "Logística Sur",
+//   "Moda VE", "Rest Group", "TechStart",
+// ];
 
 export function SocialProof() {
   const t = useTranslations("socialProof");
@@ -24,8 +24,8 @@ export function SocialProof() {
           className="mb-12"
         />
 
-        {/* Logo strip */}
-        <Reveal>
+        {/* Logo strip (temporarily disabled) */}
+        {/* <Reveal>
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {clientLogos.map((name) => (
               <span
@@ -36,19 +36,21 @@ export function SocialProof() {
               </span>
             ))}
           </div>
-        </Reveal>
+        </Reveal> */}
 
         {/* Testimonials */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
-              <GlassCard variant="subtle" className="flex flex-col p-6">
-                <span className="font-mono text-lg text-cyan">"</span>
-                <p className="mt-1 flex-1 text-sm leading-relaxed text-muted">{t.quote}</p>
+              <GlassCard variant="subtle" className="flex flex-col p-6 h-full justify-between">
+                <div>
+                  <span className="font-mono text-lg text-cyan">"</span>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{t.quote}</p>
+                </div>
                 <div className="mt-5 flex items-center justify-between border-t border-edge pt-5">
                   <div>
                     <p className="text-sm font-semibold text-ink">{t.name}</p>
-                    <p className="text-xs text-muted">{t.role} · {t.company}</p>
+                    <p className="text-xs text-muted">{t.role}</p>
                   </div>
                   <span className="rounded-full bg-cyan/10 px-3 py-1 font-mono text-xs font-semibold text-cyan">
                     {t.metric}

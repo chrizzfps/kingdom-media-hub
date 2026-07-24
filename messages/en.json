@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Kingdom Media Hub — Automated Growth Systems for Ambitious Brands",
-    "description": "We build revenue-generating digital systems: AI voice agents, automation, conversion websites and content engines that generate more leads, appointments and sales. Europe · LATAM · USA."
+    "description": "We build revenue-generating digital systems: AI-powered virtual assistants, automation, conversion websites and content engines that generate more leads, appointments and sales. Europe · LATAM · USA."
   },
   "common": {
     "growthAudit": "Get a Growth Audit",
     "bookConsultation": "Book Free Consultation",
-    "bookCall": "Book a Call",
+    "bookCall": "Book an Audit",
     "whatsapp": "WhatsApp",
     "recoverRevenue": "Recover Lost Revenue",
     "watchDemo": "Watch AI Demo",
@@ -19,6 +19,7 @@
   "nav": {
     "agency": "Agency",
     "mediaLab": "Media Lab",
+    "marketing": "Marketing",
     "academy": "Academy",
     "results": "Results",
     "faq": "FAQ",
@@ -31,7 +32,7 @@
     "titleLine1": "We build systems that",
     "titleAccent": "grow your business",
     "titleLine2": "while you sleep",
-    "subtitle": "AI voice agents, automation, conversion websites and content engines — engineered to generate more leads, appointments and revenue.",
+    "subtitle": "AI-powered virtual assistants, automation, conversion websites and content engines — engineered to generate more leads, appointments and revenue.",
     "trust": {
       "a": "AI Automation Experts",
       "b": "Revenue Growth Systems",
@@ -41,7 +42,7 @@
     "cards": {
       "appointments": "+42 appointments",
       "appointmentsLabel": "Booked today",
-      "agent": "AI Voice Agent",
+      "agent": "AI Virtual Assistant",
       "agentLabel": "Active 24/7",
       "leads": "+31% conversion",
       "leadsLabel": "Leads this month",
@@ -70,7 +71,7 @@
     "agency": {
       "name": "Agency",
       "tagline": "Grow Revenue",
-      "items": ["AI Voice Agents", "CRM Systems", "Sales Automation", "Conversion Websites"]
+      "items": ["AI Virtual Assistants", "CRM Systems", "Sales Automation", "Conversion Websites"]
     },
     "mediaLab": {
       "name": "Media Lab",
@@ -89,7 +90,7 @@
     "subtitle": "Adjust to your business. The estimate updates instantly.",
     "inputs": {
       "leads": "Monthly leads",
-      "missedCalls": "Missed calls / month",
+      "missedCalls": "Unattended leads / month",
       "ticket": "Average ticket value",
       "conversion": "Conversion rate"
     },
@@ -104,10 +105,10 @@
     "title": "Your business selling while you sleep",
     "subtitle": "Outcome-built systems that capture, qualify and convert demand 24/7 — without adding headcount.",
     "voice": {
-      "name": "AI Voice Agents",
-      "tagline": "Recover every missed call",
-      "desc": "Answers in under 2 rings, books into your calendar, and handles customer queries — in your brand's voice, at any hour.",
-      "points": ["Answers in under 2 rings", "Books straight into your calendar", "Available 24 hours, 365 days"]
+      "name": "AI-Powered Virtual Assistants",
+      "tagline": "Capture and convert every opportunity, 24/7",
+      "desc": "An AI orchestrator that handles WhatsApp, web and social media, qualifies leads, books into your calendar, and follows up — in your brand's voice, at any hour.",
+      "points": ["Replies in seconds across any channel", "Books straight into your calendar", "Available 24 hours, 365 days"]
     },
     "automation": {
       "name": "Automation Systems",
@@ -119,14 +120,12 @@
       "name": "High-Converting Websites",
       "tagline": "Built to generate revenue",
       "desc": "Sites engineered for lead generation, authority and sales — not just aesthetics.",
-      "points": ["Conversion-optimized architecture", "SEO & AEO ready from day one", "Authority that closes deals"],
-      "priceLabel": "Starting from",
-      "price": "$10,000+"
+      "points": ["Conversion-optimized architecture", "SEO & AEO ready from day one", "Authority that closes deals"]
     },
     "demo": {
-      "title": "Hear an AI Voice Agent in action",
-      "desc": "A live example of an agent recovering a missed call and booking an appointment — start to finish.",
-      "soon": "Demo coming online soon. Request a live walkthrough on a call.",
+      "title": "See an AI Virtual Assistant in action",
+      "desc": "A live example of a virtual assistant capturing an opportunity and booking an appointment — start to finish.",
+      "soon": "Demo coming online soon. Request a live walkthrough.",
       "cta": "Book a live walkthrough"
     }
   },
@@ -147,7 +146,8 @@
         "category": "campaigns",
         "metric": "+212%",
         "metricLabel": "Qualified Leads",
-        "description": "Full-funnel content strategy driving qualified traffic and lead capture."
+        "description": "Full-funnel content strategy driving qualified traffic and lead capture.",
+        "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "restaurant-chain",
@@ -155,7 +155,8 @@
         "category": "reels",
         "metric": "+38%",
         "metricLabel": "Reservations",
-        "description": "Short-form content series generating consistent reservation uplift."
+        "description": "Short-form content series generating consistent reservation uplift.",
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "medical-practice",
@@ -163,7 +164,8 @@
         "category": "commercials",
         "metric": "+41%",
         "metricLabel": "New Patients",
-        "description": "Brand authority commercial driving new patient acquisition."
+        "description": "Brand authority commercial driving new patient acquisition.",
+        "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "tech-startup",
@@ -171,9 +173,63 @@
         "category": "campaigns",
         "metric": "3.2×",
         "metricLabel": "ROAS",
-        "description": "Launch campaign across paid and organic channels."
+        "description": "Launch campaign across paid and organic channels.",
+        "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
       }
     ]
+  },
+  "marketing": {
+    "eyebrow": "Kingdom Marketing",
+    "title": "Your brand, run by a full media lab",
+    "subtitle": "Digital marketing and social media management for businesses that want to stand out — strategy, content, paid media and data operated by one integrated team.",
+    "services": [
+      {
+        "key": "social",
+        "name": "Social Media Management",
+        "desc": "Content calendars, community management and organic growth engineered to turn followers into customers.",
+        "metric": "+3.4x engagement"
+      },
+      {
+        "key": "paid",
+        "name": "Paid Media",
+        "desc": "Meta, Google and TikTok ad campaigns optimized for cost per acquisition, not just reach.",
+        "metric": "-38% CPA"
+      },
+      {
+        "key": "branding",
+        "name": "Branding & Identity",
+        "desc": "Complete brand systems — visual identity, tone of voice and guidelines that hold up across every piece of content.",
+        "metric": "100% consistency"
+      },
+      {
+        "key": "content",
+        "name": "Content Production",
+        "desc": "Video, photography and design produced in-house by our Media Lab, ready for every platform.",
+        "metric": "20+ pieces/month"
+      },
+      {
+        "key": "strategy",
+        "name": "Strategy & Growth",
+        "desc": "Quarterly growth roadmaps that connect marketing with sales and automation.",
+        "metric": "90 days to results"
+      },
+      {
+        "key": "analytics",
+        "name": "Analytics & Reporting",
+        "desc": "Live dashboards that show exactly what's generating revenue — no guesswork.",
+        "metric": "Live reporting"
+      }
+    ],
+    "team": {
+      "title": "One integrated, highly trained team",
+      "desc": "Behind every campaign are strategists, designers, editors and analysts working as one system — not scattered freelancers or a generic agency.",
+      "stats": [
+        { "value": "12+", "label": "Specialists on the team" },
+        { "value": "40+", "label": "Brands managed" },
+        { "value": "3", "label": "Continents with active clients" }
+      ],
+      "cta": "Book a marketing consultation"
+    }
   },
   "academy": {
     "eyebrow": "Kingdom Academy",
@@ -195,7 +251,7 @@
       {
         "id": "ai",
         "name": "AI Implementation",
-        "desc": "Deploy AI agents, automation systems and voice agents in real business environments.",
+        "desc": "Deploy AI agents, automation systems and virtual assistant orchestrators in real business environments.",
         "badge": "Hands-On"
       },
       {
@@ -211,7 +267,7 @@
     "title": "From audit to scale in five steps",
     "steps": [
       { "number": "01", "name": "Audit", "desc": "We map your current revenue leaks, missed opportunities and automation gaps." },
-      { "number": "02", "name": "Strategy", "desc": "We design the exact system — voice agents, automation, content, websites — matched to your goals." },
+      { "number": "02", "name": "Strategy", "desc": "We design the exact system — virtual assistants, automation, content, websites — matched to your goals." },
       { "number": "03", "name": "Implementation", "desc": "We build and deploy every component of the growth system with precision." },
       { "number": "04", "name": "Optimization", "desc": "We monitor performance, run experiments and refine until results compound." },
       { "number": "05", "name": "Scale", "desc": "We expand the system to new markets, channels and revenue streams." }
@@ -224,7 +280,7 @@
     "cases": [
       { "metric": "+212%", "label": "Qualified Leads", "client": "Fashion Brand", "country": "Venezuela" },
       { "metric": "+38%", "label": "Reservations", "client": "Restaurant Chain", "country": "LATAM" },
-      { "metric": "+41%", "label": "Recovered Calls", "client": "Medical Practice", "country": "USA" }
+      { "metric": "+41%", "label": "Recovered Conversations", "client": "Medical Practice", "country": "USA" }
     ]
   },
   "socialProof": {
@@ -239,7 +295,7 @@
         "metric": "+291% leads"
       },
       {
-        "quote": "The AI voice agent recovered 41% of our missed calls in the first month. That's revenue we were leaving on the table every single day.",
+        "quote": "The AI virtual assistant recovered 41% of our unattended leads in the first month. That's revenue we were leaving on the table every single day.",
         "name": "María Fernández",
         "role": "Practice Director",
         "company": "Centro Médico Avanza",
@@ -259,7 +315,7 @@
     "title": "Kingdom vs. the alternative",
     "columns": ["Feature", "Traditional Agency", "Freelancer", "Kingdom Media Hub"],
     "rows": [
-      { "feature": "AI Voice Agents", "agency": false, "freelancer": false, "kingdom": true },
+      { "feature": "AI Virtual Assistants", "agency": false, "freelancer": false, "kingdom": true },
       { "feature": "Sales Automation", "agency": false, "freelancer": false, "kingdom": true },
       { "feature": "CRM Systems", "agency": false, "freelancer": false, "kingdom": true },
       { "feature": "Conversion Websites", "agency": true, "freelancer": true, "kingdom": true },
@@ -275,8 +331,8 @@
     "title": "Common questions",
     "items": [
       {
-        "q": "What is an AI Voice Agent?",
-        "a": "An AI Voice Agent is an intelligent system that answers phone calls on behalf of your business, 24/7. It handles customer inquiries, qualifies leads, and books appointments directly into your calendar — in your brand's voice. Unlike a human assistant, it never misses a call and works around the clock."
+        "q": "What is an AI Virtual Assistant?",
+        "a": "An AI Virtual Assistant is an intelligent system that engages your customers on behalf of your business, 24/7, across WhatsApp, web and social media. It handles customer inquiries, qualifies leads, and books appointments directly into your calendar — in your brand's voice. Unlike a human agent, it never leaves a conversation unanswered."
       },
       {
         "q": "How much does business automation cost?",
@@ -284,19 +340,19 @@
       },
       {
         "q": "How long does a conversion website take to build?",
-        "a": "Our conversion websites are delivered in 4–8 weeks depending on scope. Every site starts from a $10,000 base and is built for lead generation, authority and sales from day one — not just aesthetics. We include SEO, AEO optimization and conversion architecture in every build."
+        "a": "Our conversion websites are delivered in 4–8 weeks depending on scope. Pricing scales with the complexity of your project and is built for lead generation, authority and sales from day one — not just aesthetics. We include SEO, AEO optimization and conversion architecture in every build."
       },
       {
         "q": "What industries benefit most from automation?",
-        "a": "Businesses with high call volume, recurring customer follow-up or multi-step sales processes see the greatest returns: medical practices, restaurants, real estate, legal services, e-commerce and professional services. If your team spends time on repetitive tasks, automation pays for itself quickly."
+        "a": "Businesses with high inquiry volume, recurring customer follow-up or multi-step sales processes see the greatest returns: medical practices, restaurants, real estate, legal services, e-commerce and professional services. If your team spends time on repetitive tasks, automation pays for itself quickly."
       },
       {
-        "q": "Can AI really answer customer calls?",
-        "a": "Yes. Modern AI voice agents handle natural conversation, answer product questions, collect lead information, and book appointments with human-level fluency. They integrate with your existing calendar and CRM so every interaction is logged and actioned automatically."
+        "q": "Can AI really handle customer service?",
+        "a": "Yes. Modern AI virtual assistants handle natural conversation, answer product questions, collect lead information, and book appointments with human-level fluency. They integrate with your existing calendar and CRM so every interaction is logged and actioned automatically."
       },
       {
         "q": "How can a restaurant recover missed reservations?",
-        "a": "An AI Voice Agent answers every call your team misses — after hours, during peak service, or when all lines are busy. It takes reservation details, confirms bookings, and sends reminders. One of our restaurant clients recovered 38% more reservations in the first 30 days."
+        "a": "An AI Virtual Assistant answers every inquiry your team misses — after hours, during peak service, or when volume is high. It takes reservation details, confirms bookings, and sends reminders. One of our restaurant clients recovered 38% more reservations in the first 30 days."
       },
       {
         "q": "What CRM should a growing business use?",
@@ -304,7 +360,7 @@
       },
       {
         "q": "How much ROI can automation generate?",
-        "a": "Our clients typically recover $1,500–$8,000 per month in previously lost revenue within the first 90 days — through recovered missed calls, faster lead follow-up, and eliminated manual work. Use our ROI Calculator above to estimate your specific opportunity."
+        "a": "Our clients typically recover $1,500–$8,000 per month in previously lost revenue within the first 90 days — through recovered opportunities, faster lead follow-up, and eliminated manual work. Use our ROI Calculator above to estimate your specific opportunity."
       }
     ]
   },
@@ -315,11 +371,11 @@
     "plans": [
       {
         "name": "Starter Automation",
-        "price": "$1,500",
-        "priceSuffix": "– $4,000",
+        "price": "Custom",
+        "priceSuffix": "",
         "desc": "For businesses ready to eliminate manual work and start recovering missed leads.",
-        "features": ["AI Voice Agent (basic)", "Lead follow-up automation", "CRM integration", "30-day optimization"],
-        "cta": "Get started",
+        "features": ["AI Virtual Assistant (basic)", "Lead follow-up automation", "CRM integration", "30-day optimization"],
+        "cta": "Book an audit",
         "popular": false
       },
       {
@@ -337,7 +393,7 @@
         "priceSuffix": "",
         "desc": "Multi-location or international deployments with dedicated strategy and execution.",
         "features": ["Everything in Growth Systems", "Multi-location rollout", "Dedicated growth strategist", "Custom AI development", "Priority support", "Quarterly strategy reviews"],
-        "cta": "Contact us",
+        "cta": "Book a consultation",
         "popular": false
       }
     ],
@@ -362,6 +418,10 @@
       "error": "Something went wrong. Please try again or message us on WhatsApp.",
       "or": "or"
     },
+    "direct": {
+      "email": "Email us",
+      "phone": "Call or message us"
+    },
     "revenueBands": {
       "under-10k": "Under $10k",
       "10k-50k": "$10k – $50k",
@@ -369,7 +429,7 @@
       "250k-plus": "$250k+"
     },
     "projectTypes": {
-      "ai-voice-agents": "AI Voice Agents",
+      "ai-voice-agents": "AI Virtual Assistants",
       "automation": "Automation Systems",
       "website": "Conversion Website",
       "content-production": "Content Production",

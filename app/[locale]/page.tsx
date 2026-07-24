@@ -6,6 +6,7 @@ import { Ecosystem } from "@/components/sections/ecosystem";
 import { ROICalculator } from "@/components/sections/roi-calculator";
 import { Agency } from "@/components/sections/agency";
 import { MediaLab } from "@/components/sections/media-lab";
+import { Marketing } from "@/components/sections/marketing";
 import { Academy } from "@/components/sections/academy";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { CaseStudies } from "@/components/sections/case-studies";
@@ -38,6 +39,7 @@ export default async function HomePage({
         <ROICalculator />
         <Agency />
         <MediaLab />
+        <Marketing />
         <Academy />
         <HowItWorks />
         <CaseStudies />

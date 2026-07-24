@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { env } from "@/lib/env";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return routing.locales.map((locale) => ({
     url: `${env.siteUrl}/${locale}`,
