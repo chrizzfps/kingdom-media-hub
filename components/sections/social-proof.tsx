@@ -3,13 +3,10 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 
-const clientLogos = [
-  "Velox Tech", "C. Médico Avanza", "Logística Sur",
-  "Moda VE", "Rest Group", "TechStart",
-];
-
 export function SocialProof() {
   const t = useTranslations("socialProof");
+  const tc = useTranslations("common");
+  const clientLogos = tc.raw("clientLogos") as string[];
   const testimonials = t.raw("testimonials") as Array<{
     quote: string; name: string; role: string; company: string; metric: string;
   }>;

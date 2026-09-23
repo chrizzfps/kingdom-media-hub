@@ -18,6 +18,44 @@ import { Footer } from "@/components/sections/footer";
 import { ScrollProgress } from "@/components/cro/scroll-progress";
 import { StickyMobileCTA } from "@/components/cro/sticky-mobile-cta";
 import { FloatingWhatsApp } from "@/components/cro/floating-whatsapp";
+import { getPublishedContent } from "@/lib/cms/get-published";
+
+// Every reorderable/hideable homepage section — driven by kingdom_sections
+// (order + visibility), edited from /admin. Hero and Contact are structural
+// (always present) but still participate in the order list.
+const SECTION_REGISTRY: Record<string, React.ComponentType> = {
+  hero: Hero,
+  trust: TrustBar,
+  ecosystem: Ecosystem,
+  roi: ROICalculator,
+  agency: Agency,
+  mediaLab: MediaLab,
+  academy: Academy,
+  howItWorks: HowItWorks,
+  caseStudies: CaseStudies,
+  socialProof: SocialProof,
+  comparison: Comparison,
+  faq: FAQ,
+  pricing: Pricing,
+  contact: Contact,
+};
+
+const DEFAULT_ORDER = [
+  "hero",
+  "trust",
+  "ecosystem",
+  "roi",
+  "agency",
+  "mediaLab",
+  "academy",
+  "howItWorks",
+  "caseStudies",
+  "socialProof",
+  "comparison",
+  "faq",
+  "pricing",
+  "contact",
+];
 
 export default async function HomePage({
   params,
@@ -27,25 +65,22 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const published = await getPublishedContent();
+  const sections = published?.sections?.filter((s) => s.group === "homepage");
+
+  const order = sections
+    ? [...sections].sort((a, b) => a.sortOrder - b.sortOrder).filter((s) => s.isVisible).map((s) => s.key)
+    : DEFAULT_ORDER;
+
   return (
     <>
       <ScrollProgress />
       <Navbar />
       <main>
-        <Hero />
-        <TrustBar />
-        <Ecosystem />
-        <ROICalculator />
-        <Agency />
-        <MediaLab />
-        <Academy />
-        <HowItWorks />
-        <CaseStudies />
-        <SocialProof />
-        <Comparison />
-        <FAQ />
-        <Pricing />
-        <Contact />
+        {order.map((key) => {
+          const Section = SECTION_REGISTRY[key];
+          return Section ? <Section key={key} /> : null;
+        })}
       </main>
       <Footer />
       <StickyMobileCTA />

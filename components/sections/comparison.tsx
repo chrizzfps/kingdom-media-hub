@@ -2,10 +2,19 @@ import { useTranslations } from "next-intl";
 import { Check, X as XIcon, Lightning } from "@phosphor-icons/react/dist/ssr";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
-import { comparisonRows } from "@/content/comparison";
+
+interface ComparisonRow {
+  feature: string;
+  agency: boolean;
+  freelancer: boolean;
+  kingdom: boolean;
+  highlight?: boolean;
+}
 
 export function Comparison() {
   const t = useTranslations("comparison");
+  const columns = t.raw("columns") as string[];
+  const comparisonRows = t.raw("rows") as ComparisonRow[];
 
   return (
     <section id="comparison" className="bg-section-alt py-24 sm:py-32">
@@ -22,7 +31,7 @@ export function Comparison() {
             {/* Header */}
             <div className="grid grid-cols-4 border-b border-edge">
               <div className="p-5" />
-              {["Traditional Agency", "Freelancer", "Kingdom Media Hub"].map((col, i) => (
+              {columns.slice(1).map((col, i) => (
                 <div
                   key={col}
                   className={`p-5 text-center ${i === 2 ? "bg-cyan/5" : ""}`}
@@ -43,16 +52,15 @@ export function Comparison() {
             </div>
 
             {/* Rows */}
-            {comparisonRows.map((row, i) => {
-              const rowFeature = (t.raw("rows") as Array<{ feature: string }>)[i]?.feature ?? row.featureKey;
+            {comparisonRows.map((row) => {
               return (
                 <div
-                  key={row.featureKey}
+                  key={row.feature}
                   className={`grid grid-cols-4 border-b border-edge last:border-0 ${row.highlight ? "bg-gray-50/50" : ""}`}
                 >
                   <div className="flex items-center p-4 pl-5">
                     <p className={`text-sm ${row.highlight ? "font-semibold text-ink" : "text-muted"}`}>
-                      {rowFeature}
+                      {row.feature}
                     </p>
                   </div>
                   {[row.agency, row.freelancer, row.kingdom].map((val, j) => (

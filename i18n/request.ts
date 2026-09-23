@@ -1,6 +1,7 @@
 import { getRequestConfig } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
+import { getPublishedContent } from "@/lib/cms/get-published";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // `requestLocale` typically corresponds to the `[locale]` segment.
@@ -9,8 +10,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
-  return {
-    locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
-  };
+  const published = await getPublishedContent();
+  const messages = published
+    ? published[locale]
+    : (await import(`../messages/${locale}.json`)).default;
+
+  return { locale, messages };
 });
