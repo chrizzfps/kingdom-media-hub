@@ -7,7 +7,7 @@
 const raw = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
   calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL,
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, // digits only, e.g. 584140000000
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "34711251968", // digits only, e.g. 584140000000
   ga4Id: process.env.NEXT_PUBLIC_GA4_ID,
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID,
   linkedInPartnerId: process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID,
@@ -26,7 +26,10 @@ export function whatsappLink(message?: string): string | null {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-/** Calendly link, falling back to the contact section if unconfigured. */
+/**
+ * Calendly link, falling back to WhatsApp while the booking flow and
+ * contact form backend aren't wired up yet.
+ */
 export function calendlyLink(): string {
-  return raw.calendlyUrl ?? "#contact";
+  return raw.calendlyUrl ?? whatsappLink() ?? "#contact";
 }

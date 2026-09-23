@@ -7,7 +7,7 @@ import { CTAButton } from "@/components/ui/cta-button";
 import { FloatingCard } from "@/components/ui/floating-card";
 import { OrganicBlob } from "@/components/ui/organic-blob";
 import { trackEvent } from "@/lib/analytics";
-import { calendlyLink } from "@/lib/env";
+import { calendlyLink, whatsappLink } from "@/lib/env";
 
 export function Hero() {
   const t  = useTranslations("hero");
@@ -79,13 +79,6 @@ export function Hero() {
 
       {/* Main content */}
       <div className="relative mx-auto w-full max-w-4xl px-5 text-center sm:px-8">
-        <motion.div {...fade(0)}>
-          <span className="glass-subtle inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan" aria-hidden />
-            {t("eyebrow")}
-          </span>
-        </motion.div>
-
         <motion.h1
           {...fade(0.07)}
           className="mt-7 font-display text-balance font-extrabold leading-[0.95] tracking-[-0.04em] text-ink"
@@ -108,7 +101,7 @@ export function Hero() {
           className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <CTAButton
-            href="#contact"
+            href={whatsappLink() ?? "#contact"}
             variant="primary"
             size="lg"
             className="w-full sm:w-auto"

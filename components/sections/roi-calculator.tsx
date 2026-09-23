@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { CTAButton } from "@/components/ui/cta-button";
 import { OrganicBlob } from "@/components/ui/organic-blob";
 import { trackEvent } from "@/lib/analytics";
+import { whatsappLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 const DEFAULTS = { missedCalls: 30, ticket: 500, conversion: 20 };
@@ -67,7 +68,7 @@ export function ROICalculator() {
                 label={t("inputs.ticket")}
                 value={ticket}
                 onChange={setTicket}
-                min={50} max={10000} step={50}
+                min={10} max={10000} step={10}
                 display={fmt(ticket)}
               />
               <Slider
@@ -80,15 +81,24 @@ export function ROICalculator() {
             </div>
 
             {/* Result */}
-            <div className="flex flex-col items-center justify-center rounded-2xl bg-white/60 p-8 text-center ring-1 ring-inset ring-cyan/20">
+            <div className="flex flex-col items-center justify-center rounded-2xl bg-white/60 p-6 sm:p-8 text-center ring-1 ring-inset ring-cyan/20 w-full max-w-full overflow-hidden">
               <p className="eyebrow">{t("resultLabel")}</p>
-              <p
-                className="mt-4 font-display font-extrabold leading-none tracking-[-0.04em] text-cyan"
-                style={{ fontSize: "clamp(3rem, 8vw, 5.5rem)" }}
-                aria-live="polite"
-              >
-                {fmt(monthly)}
-              </p>
+              <div className="mt-4 flex w-full max-w-full items-center justify-center overflow-hidden px-1">
+                <p
+                  className="font-display font-extrabold leading-none tracking-tight text-cyan max-w-full whitespace-nowrap"
+                  style={{
+                    fontSize:
+                      fmt(monthly).length > 9
+                        ? "clamp(1.75rem, 4.5vw, 3.25rem)"
+                        : fmt(monthly).length > 7
+                        ? "clamp(2.15rem, 5.5vw, 4rem)"
+                        : "clamp(2.5rem, 7vw, 5rem)",
+                  }}
+                  aria-live="polite"
+                >
+                  {fmt(monthly)}
+                </p>
+              </div>
               <p className="mt-3 text-sm text-muted">
                 {t("resultYearLabel")}{" "}
                 <strong className="font-semibold text-ink">{fmt(monthly * 12)}</strong>{" "}
@@ -96,7 +106,7 @@ export function ROICalculator() {
               </p>
               <p className="mt-4 text-xs text-dim">{t("disclaimer")}</p>
               <CTAButton
-                href="#contact"
+                href={whatsappLink() ?? "#contact"}
                 variant="primary"
                 size="lg"
                 className="mt-8 w-full"

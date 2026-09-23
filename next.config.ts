@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "*.supabase.co" },
+    ],
   },
   // Keep the production bundle lean; heavy client islands are dynamically imported.
   experimental: {

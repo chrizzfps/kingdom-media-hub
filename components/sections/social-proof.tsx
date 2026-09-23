@@ -6,7 +6,8 @@ import { Reveal } from "@/components/ui/reveal";
 export function SocialProof() {
   const t = useTranslations("socialProof");
   const tc = useTranslations("common");
-  const clientLogos = tc.raw("clientLogos") as string[];
+  // Hidden (all logos unchecked) in the CMS until real client logos are approved.
+  const clientLogos = tc.has("clientLogos") ? (tc.raw("clientLogos") as string[]) : [];
   const testimonials = t.raw("testimonials") as Array<{
     quote: string; name: string; role: string; company: string; metric: string;
   }>;
@@ -22,30 +23,34 @@ export function SocialProof() {
         />
 
         {/* Logo strip */}
-        <Reveal>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {clientLogos.map((name) => (
-              <span
-                key={name}
-                className="font-display text-sm font-bold uppercase tracking-wider text-gray-200"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </Reveal>
+        {clientLogos.length > 0 && (
+          <Reveal>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {clientLogos.map((name) => (
+                <span
+                  key={name}
+                  className="font-display text-sm font-bold uppercase tracking-wider text-gray-200"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         {/* Testimonials */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
-              <GlassCard variant="subtle" className="flex flex-col p-6">
-                <span className="font-mono text-lg text-cyan">"</span>
-                <p className="mt-1 flex-1 text-sm leading-relaxed text-muted">{t.quote}</p>
+              <GlassCard variant="subtle" className="flex flex-col p-6 h-full justify-between">
+                <div>
+                  <span className="font-mono text-lg text-cyan">"</span>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{t.quote}</p>
+                </div>
                 <div className="mt-5 flex items-center justify-between border-t border-edge pt-5">
                   <div>
                     <p className="text-sm font-semibold text-ink">{t.name}</p>
-                    <p className="text-xs text-muted">{t.role} · {t.company}</p>
+                    <p className="text-xs text-muted">{t.role}</p>
                   </div>
                   <span className="rounded-full bg-cyan/10 px-3 py-1 font-mono text-xs font-semibold text-cyan">
                     {t.metric}

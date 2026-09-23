@@ -6,6 +6,7 @@ import { Ecosystem } from "./ecosystem";
 import { ROICalculator } from "./roi-calculator";
 import { Agency } from "./agency";
 import { MediaLab } from "./media-lab";
+import { Marketing } from "./marketing";
 import { Academy } from "./academy";
 import { HowItWorks } from "./how-it-works";
 import { CaseStudies } from "./case-studies";
@@ -23,6 +24,7 @@ export const SECTION_REGISTRY: Record<string, ComponentType> = {
   roi: ROICalculator,
   agency: Agency,
   mediaLab: MediaLab,
+  marketing: Marketing,
   academy: Academy,
   howItWorks: HowItWorks,
   caseStudies: CaseStudies,

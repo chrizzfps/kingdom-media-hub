@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { ArrowRight, WhatsappLogo, CalendarCheck } from "@phosphor-icons/react";
+import { ArrowRight, WhatsappLogo, CalendarCheck, EnvelopeSimple, Phone } from "@phosphor-icons/react";
 import { contactSchema, type ContactInput, revenueBands, projectTypes } from "@/lib/validations";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CTAButton } from "@/components/ui/cta-button";
@@ -82,6 +82,23 @@ export function Contact() {
                 {tc("bookConsultation")}
               </CTAButton>
             </div>
+
+            <div className="mt-8 flex flex-col gap-3 border-t border-edge pt-6">
+              <a
+                href={`mailto:${t("direct.emailAddress")}`}
+                className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-ink"
+              >
+                <EnvelopeSimple size={18} className="shrink-0 text-cyan" />
+                <span>{t("direct.email")}: {t("direct.emailAddress")}</span>
+              </a>
+              <a
+                href={`tel:${t("direct.phoneNumber").replace(/[^+\d]/g, "")}`}
+                className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-ink"
+              >
+                <Phone size={18} className="shrink-0 text-cyan" />
+                <span>{t("direct.phone")}: {t("direct.phoneNumber")}</span>
+              </a>
+            </div>
           </div>
 
           {/* Form */}
@@ -98,16 +115,16 @@ export function Contact() {
                 {/* Row 1 */}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label={t("form.name")} error={errors.name?.message}>
-                    <Input {...register("name")} placeholder="María García" error={!!errors.name} />
+                    <Input {...register("name")} placeholder={t("placeholders.name")} error={!!errors.name} />
                   </Field>
                   <Field label={t("form.company")} error={errors.company?.message}>
-                    <Input {...register("company")} placeholder="Acme Corp" error={!!errors.company} />
+                    <Input {...register("company")} placeholder={t("placeholders.company")} error={!!errors.company} />
                   </Field>
                 </div>
                 {/* Row 2 */}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label={t("form.industry")} error={errors.industry?.message}>
-                    <Input {...register("industry")} placeholder="Technology" error={!!errors.industry} />
+                    <Input {...register("industry")} placeholder={t("placeholders.industry")} error={!!errors.industry} />
                   </Field>
                   <Field label={t("form.revenue")} error={errors.revenue?.message}>
                     <Select {...register("revenue")} error={!!errors.revenue}>
@@ -121,10 +138,10 @@ export function Contact() {
                 {/* Row 3 */}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label={t("form.email")} error={errors.email?.message}>
-                    <Input {...register("email")} type="email" placeholder="hola@empresa.com" error={!!errors.email} />
+                    <Input {...register("email")} type="email" placeholder={t("placeholders.email")} error={!!errors.email} />
                   </Field>
                   <Field label={t("form.phone")} error={errors.phone?.message}>
-                    <Input {...register("phone")} placeholder="+1 555 000 0000" error={!!errors.phone} />
+                    <Input {...register("phone")} placeholder={t("placeholders.phone")} error={!!errors.phone} />
                   </Field>
                 </div>
                 {/* Project type */}
@@ -141,7 +158,7 @@ export function Contact() {
                   <textarea
                     {...register("message")}
                     rows={3}
-                    placeholder="..."
+                    placeholder={t("placeholders.message")}
                     className="w-full resize-none rounded-xl border border-edge-strong bg-white px-4 py-3 text-sm text-ink placeholder-dim outline-none transition-colors focus:border-cyan/50 focus:ring-2 focus:ring-cyan/20"
                   />
                 </Field>

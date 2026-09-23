@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 import { InstagramLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
+import { KingdomLogo } from "@/components/ui/kingdom-logo";
+import { whatsappLink } from "@/lib/env";
 
 const ecosystem = [
   { key: "agency", href: "#agency" },
@@ -10,7 +12,8 @@ const ecosystem = [
 const company = [
   { key: "results", href: "#results" },
   { key: "faq", href: "#faq" },
-  { key: "getStarted", href: "#contact" },
+  // Contact form backend not wired up yet — send to WhatsApp for now.
+  { key: "getStarted", href: whatsappLink() ?? "#contact" },
 ] as const;
 
 const socials = [
@@ -29,17 +32,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path d="M4 18V8l4 4 4-7 4 7 4-4v10z" fill="white" opacity="0.9" />
-                  <circle cx="12" cy="20.5" r="1.4" fill="#33CCFF" />
-                </svg>
-              </span>
-              <span className="font-display text-base font-bold text-white">
-                Kingdom <span className="font-medium text-white/60">Media Hub</span>
-              </span>
-            </div>
+            <KingdomLogo height={28} color="white" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
               {t("tagline")}
             </p>

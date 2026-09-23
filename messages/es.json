@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Kingdom Media Hub — Sistemas de Crecimiento Automatizados para Marcas Ambiciosas",
-    "description": "Construimos sistemas digitales que generan ingresos: agentes de voz con IA, automatización, sitios web de conversión y motores de contenido. Europa · LATAM · USA."
+    "description": "Construimos sistemas digitales que generan ingresos: asistentes virtuales con IA, automatización, sitios web de conversión y motores de contenido. Europa · LATAM · USA."
   },
   "common": {
     "growthAudit": "Solicita una Auditoría",
     "bookConsultation": "Agenda una Consulta Gratis",
-    "bookCall": "Agenda una Llamada",
+    "bookCall": "Agenda una Auditoría",
     "whatsapp": "WhatsApp",
     "recoverRevenue": "Recupera Ingresos Perdidos",
     "watchDemo": "Ver Demo de IA",
@@ -19,6 +19,7 @@
   "nav": {
     "agency": "Agencia",
     "mediaLab": "Media Lab",
+    "marketing": "Marketing",
     "academy": "Academia",
     "results": "Resultados",
     "faq": "Preguntas",
@@ -31,7 +32,7 @@
     "titleLine1": "Construimos sistemas que",
     "titleAccent": "hacen crecer tu negocio",
     "titleLine2": "mientras duermes",
-    "subtitle": "Agentes de voz con IA, automatización, sitios web de conversión y motores de contenido — diseñados para generar más prospectos, citas y ventas.",
+    "subtitle": "Asistentes virtuales con IA, automatización, sitios web de conversión y motores de contenido — diseñados para generar más prospectos, citas y ventas.",
     "trust": {
       "a": "Expertos en Automatización IA",
       "b": "Sistemas de Crecimiento",
@@ -41,7 +42,7 @@
     "cards": {
       "appointments": "+42 citas",
       "appointmentsLabel": "Reservadas hoy",
-      "agent": "Agente de Voz IA",
+      "agent": "Asistente Virtual IA",
       "agentLabel": "Activo 24/7",
       "leads": "+31% conversión",
       "leadsLabel": "Leads este mes",
@@ -70,17 +71,32 @@
     "agency": {
       "name": "Agencia",
       "tagline": "Genera Ingresos",
-      "items": ["Agentes de Voz IA", "Sistemas CRM", "Automatización de Ventas", "Webs de Conversión"]
+      "items": [
+        "Asistentes Virtuales IA",
+        "Sistemas CRM",
+        "Automatización de Ventas",
+        "Webs de Conversión"
+      ]
     },
     "mediaLab": {
       "name": "Media Lab",
       "tagline": "Crea Demanda",
-      "items": ["Comerciales", "Reels", "Sistemas de Contenido", "Narrativa de Marca"]
+      "items": [
+        "Comerciales",
+        "Reels",
+        "Sistemas de Contenido",
+        "Narrativa de Marca"
+      ]
     },
     "academy": {
       "name": "Academia",
       "tagline": "Forma Equipos",
-      "items": ["Educación de Marca", "Marketing", "Formación en IA", "Proyectos Reales"]
+      "items": [
+        "Educación de Marca",
+        "Marketing",
+        "Formación en IA",
+        "Proyectos Reales"
+      ]
     }
   },
   "roi": {
@@ -89,7 +105,7 @@
     "subtitle": "Ajusta a tu negocio. La estimación se actualiza al instante.",
     "inputs": {
       "leads": "Prospectos al mes",
-      "missedCalls": "Llamadas perdidas / mes",
+      "missedCalls": "Oportunidades sin atender / mes",
       "ticket": "Ticket promedio",
       "conversion": "Tasa de conversión"
     },
@@ -104,29 +120,39 @@
     "title": "Tu negocio vendiendo mientras duermes",
     "subtitle": "Sistemas orientados a resultados que captan, califican y convierten la demanda 24/7 — sin sumar personal.",
     "voice": {
-      "name": "Agentes de Voz con IA",
-      "tagline": "Recupera cada llamada perdida",
-      "desc": "Responde en menos de 2 timbres, agenda en tu calendario y atiende consultas — con la voz de tu marca, a cualquier hora.",
-      "points": ["Responde en menos de 2 timbres", "Agenda directo en tu calendario", "Disponible 24 horas, 365 días"]
+      "name": "Asistentes Virtuales con IA",
+      "tagline": "Captura y convierte cada oportunidad, 24/7",
+      "desc": "Un orquestador de IA que atiende WhatsApp, web y redes sociales, califica prospectos, agenda en tu calendario y da seguimiento — con la voz de tu marca, a cualquier hora.",
+      "points": [
+        "Responde en segundos por cualquier canal",
+        "Agenda directo en tu calendario",
+        "Disponible 24 horas, 365 días"
+      ]
     },
     "automation": {
       "name": "Sistemas de Automatización",
       "tagline": "Elimina el trabajo manual",
       "desc": "Automatiza seguimientos, actualizaciones de CRM y asignación de pipeline para que tu equipo solo se enfoque en cerrar.",
-      "points": ["Automatización de CRM y pipeline", "Secuencias de seguimiento instantáneas", "Eficiencia operativa a escala"]
+      "points": [
+        "Automatización de CRM y pipeline",
+        "Secuencias de seguimiento instantáneas",
+        "Eficiencia operativa a escala"
+      ]
     },
     "websites": {
       "name": "Webs de Alta Conversión",
       "tagline": "Construidas para generar ingresos",
       "desc": "Sitios diseñados para generación de prospectos, autoridad y ventas — no solo estética.",
-      "points": ["Arquitectura optimizada para conversión", "SEO y AEO listos desde el día uno", "Autoridad que cierra ventas"],
-      "priceLabel": "Desde",
-      "price": "$10,000+"
+      "points": [
+        "Arquitectura optimizada para conversión",
+        "SEO y AEO listos desde el día uno",
+        "Autoridad que cierra ventas"
+      ]
     },
     "demo": {
-      "title": "Escucha un Agente de Voz con IA en acción",
-      "desc": "Un ejemplo real de un agente recuperando una llamada perdida y agendando una cita — de principio a fin.",
-      "soon": "La demo estará disponible pronto. Solicita una demostración en vivo en una llamada.",
+      "title": "Ve un Asistente Virtual con IA en acción",
+      "desc": "Un ejemplo real de un asistente virtual capturando una oportunidad y agendando una cita — de principio a fin.",
+      "soon": "La demo estará disponible pronto. Solicita una demostración en vivo.",
       "cta": "Agenda una demostración en vivo"
     }
   },
@@ -147,7 +173,8 @@
         "category": "campaigns",
         "metric": "+212%",
         "metricLabel": "Leads Calificados",
-        "description": "Estrategia de contenido full-funnel para generar tráfico calificado y captura de leads."
+        "description": "Estrategia de contenido full-funnel para generar tráfico calificado y captura de leads.",
+        "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "restaurant-chain",
@@ -155,7 +182,8 @@
         "category": "reels",
         "metric": "+38%",
         "metricLabel": "Reservaciones",
-        "description": "Serie de contenido corto que generó incremento consistente en reservaciones."
+        "description": "Serie de contenido corto que generó incremento consistente en reservaciones.",
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "medical-practice",
@@ -163,7 +191,8 @@
         "category": "commercials",
         "metric": "+41%",
         "metricLabel": "Nuevos Pacientes",
-        "description": "Comercial de autoridad de marca para adquirir nuevos pacientes."
+        "description": "Comercial de autoridad de marca para adquirir nuevos pacientes.",
+        "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "tech-startup",
@@ -171,9 +200,72 @@
         "category": "campaigns",
         "metric": "3.2×",
         "metricLabel": "ROAS",
-        "description": "Campaña de lanzamiento en canales pagos y orgánicos."
+        "description": "Campaña de lanzamiento en canales pagos y orgánicos.",
+        "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
       }
     ]
+  },
+  "marketing": {
+    "eyebrow": "Kingdom Marketing",
+    "title": "Tu marca, gestionada por un media lab completo",
+    "subtitle": "Gestión de mercadeo digital y redes sociales para empresas que quieren destacar — estrategia, contenido, pauta y datos operados por un solo equipo integral.",
+    "services": [
+      {
+        "key": "social",
+        "name": "Gestión de Redes Sociales",
+        "desc": "Calendarios de contenido, community management y crecimiento orgánico diseñados para convertir seguidores en clientes.",
+        "metric": "+3.4x engagement"
+      },
+      {
+        "key": "paid",
+        "name": "Paid Media",
+        "desc": "Campañas de pauta en Meta, Google y TikTok optimizadas para costo por adquisición, no solo alcance.",
+        "metric": "-38% CPA"
+      },
+      {
+        "key": "branding",
+        "name": "Branding e Identidad",
+        "desc": "Sistemas de marca completos — identidad visual, tono de voz y guías que sostienen cada pieza de contenido.",
+        "metric": "100% consistencia"
+      },
+      {
+        "key": "content",
+        "name": "Producción de Contenido",
+        "desc": "Video, fotografía y diseño producidos en casa por nuestro Media Lab, listos para cada plataforma.",
+        "metric": "20+ piezas/mes"
+      },
+      {
+        "key": "strategy",
+        "name": "Estrategia y Growth",
+        "desc": "Roadmaps de crecimiento trimestrales que conectan marketing con ventas y automatización.",
+        "metric": "90 días a resultados"
+      },
+      {
+        "key": "analytics",
+        "name": "Analítica y Reporting",
+        "desc": "Dashboards en vivo que muestran exactamente qué está generando ingresos — sin adivinar.",
+        "metric": "Reporte en vivo"
+      }
+    ],
+    "team": {
+      "title": "Un equipo integral, altamente capacitado",
+      "desc": "Detrás de cada campaña hay estrategas, diseñadores, editores y analistas trabajando como un solo sistema — no freelancers dispersos ni una agencia genérica.",
+      "stats": [
+        {
+          "value": "12+",
+          "label": "Especialistas en el equipo"
+        },
+        {
+          "value": "40+",
+          "label": "Marcas gestionadas"
+        },
+        {
+          "value": "3",
+          "label": "Continentes con clientes activos"
+        }
+      ],
+      "cta": "Agenda una consultoría de marketing"
+    }
   },
   "academy": {
     "eyebrow": "Kingdom Academy",
@@ -195,7 +287,7 @@
       {
         "id": "ai",
         "name": "Implementación de IA",
-        "desc": "Despliega agentes IA, sistemas de automatización y agentes de voz en entornos empresariales reales.",
+        "desc": "Despliega agentes IA, sistemas de automatización y orquestadores de asistentes virtuales en entornos empresariales reales.",
         "badge": "Práctico"
       },
       {
@@ -210,11 +302,31 @@
     "eyebrow": "El proceso",
     "title": "De auditoría a escala en cinco pasos",
     "steps": [
-      { "number": "01", "name": "Auditoría", "desc": "Mapeamos tus fugas de ingresos actuales, oportunidades perdidas y brechas de automatización." },
-      { "number": "02", "name": "Estrategia", "desc": "Diseñamos el sistema exacto — agentes de voz, automatización, contenido, sitios web — alineado a tus objetivos." },
-      { "number": "03", "name": "Implementación", "desc": "Construimos y desplegamos cada componente del sistema de crecimiento con precisión." },
-      { "number": "04", "name": "Optimización", "desc": "Monitoreamos el rendimiento, ejecutamos experimentos y refinamos hasta que los resultados se compoundan." },
-      { "number": "05", "name": "Escala", "desc": "Expandimos el sistema a nuevos mercados, canales y fuentes de ingresos." }
+      {
+        "number": "01",
+        "name": "Auditoría",
+        "desc": "Mapeamos tus fugas de ingresos actuales, oportunidades perdidas y brechas de automatización."
+      },
+      {
+        "number": "02",
+        "name": "Estrategia",
+        "desc": "Diseñamos el sistema exacto — asistentes virtuales, automatización, contenido, sitios web — alineado a tus objetivos."
+      },
+      {
+        "number": "03",
+        "name": "Implementación",
+        "desc": "Construimos y desplegamos cada componente del sistema de crecimiento con precisión."
+      },
+      {
+        "number": "04",
+        "name": "Optimización",
+        "desc": "Monitoreamos el rendimiento, ejecutamos experimentos y refinamos hasta que los resultados se compoundan."
+      },
+      {
+        "number": "05",
+        "name": "Escala",
+        "desc": "Expandimos el sistema a nuevos mercados, canales y fuentes de ingresos."
+      }
     ]
   },
   "caseStudies": {
@@ -222,9 +334,24 @@
     "title": "Resultados que hablan",
     "subtitle": "Resultados reales de negocios reales. Sin proyecciones — solo lo que ya fue entregado.",
     "cases": [
-      { "metric": "+212%", "label": "Leads Calificados", "client": "Marca de Moda", "country": "Venezuela" },
-      { "metric": "+38%", "label": "Reservaciones", "client": "Cadena de Restaurantes", "country": "LATAM" },
-      { "metric": "+41%", "label": "Llamadas Recuperadas", "client": "Práctica Médica", "country": "USA" }
+      {
+        "metric": "+212%",
+        "label": "Leads Calificados",
+        "client": "Marca de Moda",
+        "country": "Venezuela"
+      },
+      {
+        "metric": "+38%",
+        "label": "Reservaciones",
+        "client": "Cadena de Restaurantes",
+        "country": "LATAM"
+      },
+      {
+        "metric": "+41%",
+        "label": "Conversaciones Recuperadas",
+        "client": "Práctica Médica",
+        "country": "USA"
+      }
     ]
   },
   "socialProof": {
@@ -239,7 +366,7 @@
         "metric": "+291% leads"
       },
       {
-        "quote": "El agente de voz con IA recuperó el 41% de nuestras llamadas perdidas en el primer mes. Eran ingresos que dejábamos ir todos los días.",
+        "quote": "El asistente virtual con IA recuperó el 41% de nuestras oportunidades sin atender en el primer mes. Eran ingresos que dejábamos ir todos los días.",
         "name": "María Fernández",
         "role": "Directora",
         "company": "Centro Médico Avanza",
@@ -257,16 +384,61 @@
   "comparison": {
     "eyebrow": "La diferencia",
     "title": "Kingdom vs. la alternativa",
-    "columns": ["Característica", "Agencia Tradicional", "Freelancer", "Kingdom Media Hub"],
+    "columns": [
+      "Característica",
+      "Agencia Tradicional",
+      "Freelancer",
+      "Kingdom Media Hub"
+    ],
     "rows": [
-      { "feature": "Agentes de Voz IA", "agency": false, "freelancer": false, "kingdom": true },
-      { "feature": "Automatización de Ventas", "agency": false, "freelancer": false, "kingdom": true },
-      { "feature": "Sistemas CRM", "agency": false, "freelancer": false, "kingdom": true },
-      { "feature": "Webs de Conversión", "agency": true, "freelancer": true, "kingdom": true },
-      { "feature": "Producción de Contenido", "agency": true, "freelancer": true, "kingdom": true },
-      { "feature": "Formación de Equipos", "agency": false, "freelancer": false, "kingdom": true },
-      { "feature": "Optimización de Ingresos", "agency": false, "freelancer": false, "kingdom": true },
-      { "feature": "Ecosistema Completo", "agency": false, "freelancer": false, "kingdom": true }
+      {
+        "feature": "Asistentes Virtuales IA",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      },
+      {
+        "feature": "Automatización de Ventas",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      },
+      {
+        "feature": "Sistemas CRM",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      },
+      {
+        "feature": "Webs de Conversión",
+        "agency": true,
+        "freelancer": true,
+        "kingdom": true
+      },
+      {
+        "feature": "Producción de Contenido",
+        "agency": true,
+        "freelancer": true,
+        "kingdom": true
+      },
+      {
+        "feature": "Formación de Equipos",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      },
+      {
+        "feature": "Optimización de Ingresos",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      },
+      {
+        "feature": "Ecosistema Completo",
+        "agency": false,
+        "freelancer": false,
+        "kingdom": true
+      }
     ],
     "badge": "Mejor opción"
   },
@@ -275,8 +447,8 @@
     "title": "Preguntas comunes",
     "items": [
       {
-        "q": "¿Qué es un Agente de Voz con IA?",
-        "a": "Un Agente de Voz con IA es un sistema inteligente que atiende llamadas telefónicas en nombre de tu negocio, las 24 horas. Maneja consultas de clientes, califica prospectos y agenda citas directamente en tu calendario — con la voz de tu marca, a cualquier hora. A diferencia de un asistente humano, nunca pierde una llamada."
+        "q": "¿Qué es un Asistente Virtual con IA?",
+        "a": "Un Asistente Virtual con IA es un sistema inteligente que atiende a tus clientes en nombre de tu negocio, las 24 horas, por WhatsApp, web y redes sociales. Maneja consultas, califica prospectos y agenda citas directamente en tu calendario — con la voz de tu marca, a cualquier hora. A diferencia de un agente humano, nunca deja una conversación sin responder."
       },
       {
         "q": "¿Cuánto cuesta la automatización empresarial?",
@@ -284,19 +456,19 @@
       },
       {
         "q": "¿Cuánto tarda en construirse un sitio web de conversión?",
-        "a": "Nuestros sitios web de conversión se entregan en 4–8 semanas según el alcance. Cada sitio parte desde $10,000 y está diseñado para generación de prospectos, autoridad y ventas desde el primer día — no solo estética. Incluimos SEO, optimización AEO y arquitectura de conversión en cada proyecto."
+        "a": "Nuestros sitios web de conversión se entregan en 4–8 semanas según el alcance. El precio escala según la complejidad del proyecto y está diseñado para generación de prospectos, autoridad y ventas desde el primer día — no solo estética. Incluimos SEO, optimización AEO y arquitectura de conversión en cada proyecto."
       },
       {
         "q": "¿Qué industrias se benefician más de la automatización?",
-        "a": "Los negocios con alto volumen de llamadas, seguimiento recurrente o procesos de venta multietapa obtienen los mayores retornos: clínicas médicas, restaurantes, bienes raíces, servicios legales, e-commerce y servicios profesionales. Si tu equipo dedica tiempo a tareas repetitivas, la automatización se paga sola rápidamente."
+        "a": "Los negocios con alto volumen de consultas, seguimiento recurrente o procesos de venta multietapa obtienen los mayores retornos: clínicas médicas, restaurantes, bienes raíces, servicios legales, e-commerce y servicios profesionales. Si tu equipo dedica tiempo a tareas repetitivas, la automatización se paga sola rápidamente."
       },
       {
-        "q": "¿Puede la IA responder realmente las llamadas de los clientes?",
-        "a": "Sí. Los agentes de voz modernos manejan conversaciones naturales, responden preguntas sobre productos, recopilan información de prospectos y agendan citas con fluidez natural. Se integran con tu calendario y CRM existentes para que cada interacción quede registrada y procesada automáticamente."
+        "q": "¿Puede la IA gestionar realmente la atención al cliente?",
+        "a": "Sí. Los asistentes virtuales modernos manejan conversaciones naturales, responden preguntas sobre productos, recopilan información de prospectos y agendan citas con fluidez natural. Se integran con tu calendario y CRM existentes para que cada interacción quede registrada y procesada automáticamente."
       },
       {
         "q": "¿Cómo puede un restaurante recuperar reservaciones perdidas?",
-        "a": "Un Agente de Voz con IA atiende cada llamada que tu equipo pierde — fuera de horario, durante el servicio pico o cuando las líneas están ocupadas. Toma los datos de reservación, confirma la cita y envía recordatorios. Uno de nuestros clientes restauranteros recuperó 38% más reservaciones en los primeros 30 días."
+        "a": "Un Asistente Virtual con IA atiende cada consulta que tu equipo no alcanza a responder — fuera de horario, durante el servicio pico o cuando el volumen es alto. Toma los datos de reservación, confirma la cita y envía recordatorios. Uno de nuestros clientes restauranteros recuperó 38% más reservaciones en los primeros 30 días."
       },
       {
         "q": "¿Qué CRM debería usar un negocio en crecimiento?",
@@ -304,7 +476,7 @@
       },
       {
         "q": "¿Cuánto ROI puede generar la automatización?",
-        "a": "Nuestros clientes suelen recuperar $1,500–$8,000 por mes en ingresos previamente perdidos durante los primeros 90 días — mediante llamadas recuperadas, seguimiento más rápido de prospectos y eliminación de trabajo manual. Usa nuestra Calculadora de ROI arriba para estimar tu oportunidad específica."
+        "a": "Nuestros clientes suelen recuperar $1,500–$8,000 por mes en ingresos previamente perdidos durante los primeros 90 días — mediante oportunidades recuperadas, seguimiento más rápido de prospectos y eliminación de trabajo manual. Usa nuestra Calculadora de ROI arriba para estimar tu oportunidad específica."
       }
     ]
   },
@@ -315,11 +487,16 @@
     "plans": [
       {
         "name": "Automatización Inicial",
-        "price": "$1,500",
-        "priceSuffix": "– $4,000",
+        "price": "Personalizado",
+        "priceSuffix": "",
         "desc": "Para negocios listos para eliminar el trabajo manual y comenzar a recuperar prospectos perdidos.",
-        "features": ["Agente de Voz IA (básico)", "Automatización de seguimiento", "Integración CRM", "Optimización 30 días"],
-        "cta": "Comenzar",
+        "features": [
+          "Asistente Virtual IA (básico)",
+          "Automatización de seguimiento",
+          "Integración CRM",
+          "Optimización 30 días"
+        ],
+        "cta": "Agenda tu auditoría",
         "popular": false
       },
       {
@@ -327,7 +504,14 @@
         "price": "Personalizado",
         "priceSuffix": "",
         "desc": "El ecosistema Kingdom completo: automatización, contenido, conversión y formación trabajando juntos.",
-        "features": ["Stack completo de automatización IA", "Sitio web de alta conversión", "Producción de contenido", "Formación de equipos", "Optimización 90 días", "Reporte mensual"],
+        "features": [
+          "Stack completo de automatización IA",
+          "Sitio web de alta conversión",
+          "Producción de contenido",
+          "Formación de equipos",
+          "Optimización 90 días",
+          "Reporte mensual"
+        ],
         "cta": "Agenda auditoría",
         "popular": true
       },
@@ -336,8 +520,15 @@
         "price": "Personalizado",
         "priceSuffix": "",
         "desc": "Despliegues multi-ubicación o internacionales con estrategia y ejecución dedicadas.",
-        "features": ["Todo en Growth Systems", "Despliegue multi-ubicación", "Estratega de crecimiento dedicado", "Desarrollo IA personalizado", "Soporte prioritario", "Revisiones de estrategia trimestrales"],
-        "cta": "Contáctanos",
+        "features": [
+          "Todo en Growth Systems",
+          "Despliegue multi-ubicación",
+          "Estratega de crecimiento dedicado",
+          "Desarrollo IA personalizado",
+          "Soporte prioritario",
+          "Revisiones de estrategia trimestrales"
+        ],
+        "cta": "Agenda una consultoría",
         "popular": false
       }
     ],
@@ -362,6 +553,12 @@
       "error": "Algo salió mal. Inténtalo de nuevo o escríbenos por WhatsApp.",
       "or": "o"
     },
+    "direct": {
+      "email": "Escríbenos",
+      "phone": "Llámanos o escríbenos",
+      "emailAddress": "contact@kingdommediahub.com",
+      "phoneNumber": "+34 711 251 968"
+    },
     "revenueBands": {
       "under-10k": "Menos de $10k",
       "10k-50k": "$10k – $50k",
@@ -369,7 +566,7 @@
       "250k-plus": "$250k+"
     },
     "projectTypes": {
-      "ai-voice-agents": "Agentes de Voz con IA",
+      "ai-voice-agents": "Asistentes Virtuales con IA",
       "automation": "Sistemas de Automatización",
       "website": "Web de Conversión",
       "content-production": "Producción de Contenido",
@@ -384,6 +581,14 @@
       "email": "Ingresa un correo válido",
       "phone": "Ingresa un teléfono válido",
       "projectType": "Selecciona qué necesitas"
+    },
+    "placeholders": {
+      "name": "María García",
+      "company": "Acme Corp",
+      "industry": "Technology",
+      "email": "hola@empresa.com",
+      "phone": "+34 711 251 968",
+      "message": "..."
     }
   },
   "footer": {

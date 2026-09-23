@@ -6,15 +6,18 @@ import { List, X } from "@phosphor-icons/react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { CTAButton } from "@/components/ui/cta-button";
+import { KingdomLogo } from "@/components/ui/kingdom-logo";
 import { trackEvent } from "@/lib/analytics";
+import { whatsappLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { id: "#agency",    key: "agency"   },
-  { id: "#media-lab", key: "mediaLab" },
-  { id: "#academy",   key: "academy"  },
-  { id: "#results",   key: "results"  },
-  { id: "#faq",       key: "faq"      },
+  { id: "#agency",    key: "agency"    },
+  { id: "#media-lab", key: "mediaLab"  },
+  { id: "#marketing", key: "marketing" },
+  { id: "#academy",   key: "academy"   },
+  { id: "#results",   key: "results"   },
+  { id: "#faq",       key: "faq"       },
 ] as const;
 
 export function Navbar() {
@@ -46,11 +49,8 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
         {/* Logo */}
-        <a href="#top" className="group flex items-center gap-2.5" aria-label="Kingdom Media Hub">
-          <KingdomMark />
-          <span className="font-display text-lg font-bold tracking-tight text-ink">
-            Kingdom <span className="text-muted font-medium">Media Hub</span>
-          </span>
+        <a href="#top" aria-label="Kingdom Media Hub">
+          <KingdomLogo height={32} />
         </a>
 
         {/* Desktop links */}
@@ -70,7 +70,7 @@ export function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <LocaleToggle />
           <CTAButton
-            href="#contact"
+            href={whatsappLink() ?? "#contact"}
             variant="primary"
             size="sm"
             onClick={() => trackEvent("cta_growth_audit", { location: "navbar" })}
@@ -109,7 +109,7 @@ export function Navbar() {
           <div className="mt-4 flex items-center justify-between gap-3 border-t border-edge pt-4">
             <LocaleToggle />
             <CTAButton
-              href="#contact"
+              href={whatsappLink() ?? "#contact"}
               variant="primary"
               className="flex-1"
               onClick={() => { setOpen(false); trackEvent("cta_growth_audit", { location: "mobile_menu" }); }}
@@ -153,20 +153,5 @@ function LocaleToggle() {
         </button>
       ))}
     </div>
-  );
-}
-
-function KingdomMark() {
-  return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path
-          d="M4 18V8l4 4 4-7 4 7 4-4v10z"
-          fill="white"
-          opacity="0.9"
-        />
-        <circle cx="12" cy="20.5" r="1.4" fill="#33CCFF" />
-      </svg>
-    </span>
   );
 }

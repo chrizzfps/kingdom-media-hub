@@ -14,7 +14,8 @@ export function TrustBar() {
   const t = useTranslations("trust");
   const tc = useTranslations("common");
   const stats = t.raw("statsItems") as StatItem[];
-  const clientLogos = tc.raw("clientLogos") as string[];
+  // Hidden (all logos unchecked) in the CMS until real client logos are approved.
+  const clientLogos = tc.has("clientLogos") ? (tc.raw("clientLogos") as string[]) : [];
 
   return (
     <section aria-label={t("title")} className="border-y border-edge bg-gray-50 py-16 sm:py-20">
@@ -44,19 +45,21 @@ export function TrustBar() {
         </dl>
 
         {/* Client logo strip */}
-        <Reveal delay={0.15}>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {clientLogos.map((name) => (
-              <span
-                key={name}
-                className="font-display text-sm font-bold tracking-wider text-gray-300 uppercase"
-                aria-label={name}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </Reveal>
+        {clientLogos.length > 0 && (
+          <Reveal delay={0.15}>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {clientLogos.map((name) => (
+                <span
+                  key={name}
+                  className="font-display text-sm font-bold tracking-wider text-gray-300 uppercase"
+                  aria-label={name}
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   );

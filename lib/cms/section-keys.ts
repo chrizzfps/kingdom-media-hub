@@ -12,6 +12,7 @@ export const SECTION_KEYS = [
   "roi",
   "agency",
   "mediaLab",
+  "marketing",
   "academy",
   "howItWorks",
   "caseStudies",

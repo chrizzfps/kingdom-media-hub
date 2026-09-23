@@ -36,11 +36,13 @@ export async function generateMetadata({
       siteName: "Kingdom Media Hub",
       title: t("title"),
       description: t("description"),
+      images: ["/opengraph-image.png"],
     },
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
+      images: ["/opengraph-image.png"],
     },
     robots: { index: true, follow: true },
   };
@@ -67,7 +69,7 @@ export default async function LocaleLayout({
         <script {...jsonLdScript(organizationSchema())} />
         <script {...jsonLdScript(localBusinessSchema())} />
       </head>
-      <body className="min-h-dvh antialiased">
+      <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <NextIntlClientProvider>
           <LenisProvider>{children}</LenisProvider>
         </NextIntlClientProvider>

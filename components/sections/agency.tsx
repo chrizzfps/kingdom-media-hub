@@ -1,15 +1,16 @@
 import { useTranslations } from "next-intl";
-import { PhoneCall, Lightning, Browser, CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import { Robot, Lightning, Browser, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 import { CTAButton } from "@/components/ui/cta-button";
 import { OrganicBlob } from "@/components/ui/organic-blob";
+import { whatsappLink } from "@/lib/env";
 import { DemoButton } from "./demo-button";
 import { AIDemoModal } from "./ai-demo-modal";
 
 const services = [
-  { key: "voice",      Icon: PhoneCall },
+  { key: "voice",      Icon: Robot },
   { key: "automation", Icon: Lightning },
   { key: "websites",   Icon: Browser, featured: true },
 ] as const;
@@ -51,13 +52,6 @@ export function Agency() {
                     </h3>
                     <p className="mt-4 text-base leading-relaxed text-muted">{t(`${key}.desc`)}</p>
 
-                    {featured && (
-                      <p className="mt-4 font-mono text-2xl font-bold text-ink">
-                        <span className="text-sm font-normal text-muted mr-1">{t("websites.priceLabel")}</span>
-                        {t("websites.price")}
-                      </p>
-                    )}
-
                     <ul className="mt-6 space-y-3">
                       {points.map((point) => (
                         <li key={point} className="flex items-start gap-3 text-sm text-muted">
@@ -72,7 +66,7 @@ export function Agency() {
                     </ul>
 
                     <div className="mt-8 flex flex-wrap gap-3">
-                      <CTAButton href="#contact" variant="primary" size="md">
+                      <CTAButton href={whatsappLink() ?? "#contact"} variant="primary" size="md">
                         {tc("bookCall")}
                       </CTAButton>
                       {featured && <DemoButton />}
