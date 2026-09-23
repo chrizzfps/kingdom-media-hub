@@ -19,14 +19,6 @@ export const env = {
   siteUrl: raw.siteUrl ?? "https://kingdommediahub.com",
 };
 
-/** Server-only secrets — never import into client components. */
-export const serverEnv = {
-  resendApiKey: process.env.RESEND_API_KEY,
-  contactToEmail: process.env.CONTACT_TO_EMAIL ?? "hello@kingdommediahub.com",
-  contactFromEmail:
-    process.env.CONTACT_FROM_EMAIL ?? "Kingdom Media Hub <noreply@kingdommediahub.com>",
-};
-
 /** Build a WhatsApp deep link with an optional prefilled message. */
 export function whatsappLink(message?: string): string | null {
   if (!raw.whatsappNumber) return null;

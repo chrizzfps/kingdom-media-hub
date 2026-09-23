@@ -1,17 +1,166 @@
-"use server";
-
-import { revalidatePath } from "next/cache";
-import { randomUUID } from "node:crypto";
-import { createClient } from "@/lib/supabase/server";
-import { requireAdmin } from "./admin-guard";
+import { createClient } from "@/lib/supabase/client";
 import { buildLocaleContent } from "./build-snapshot";
 import type { FieldValueRow, ItemRow, Locale, PublishedSnapshot, SectionRow } from "./types";
+
+// Runs in the browser with the admin's own session. Authorization is enforced
+// by RLS (kingdom_is_admin()) and the storage bucket's own type/size limits —
+// the checks here only exist to give clear error messages.
 
 type ActionResult = { ok: true } | { ok: false; error: string };
 
 function fail(error: unknown): ActionResult {
-  return { ok: false, error: error instanceof Error ? error.message : "Unexpected error." };
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === "object" && error && "message" in error
+        ? String((error as { message: unknown }).message)
+        : "Unexpected error.";
+  return { ok: false, error: message };
 }
+
+const now = () => new Date().toISOString();
+
+async function currentUserId() {
+  const { data } = await createClient().auth.getUser();
+  if (!data.user) throw new Error("Tu sesión expiró. Vuelve a entrar.");
+  return data.user.id;
+}
+
+// ------------------------------------------------------------------ auth --
+
+export async function signIn(email: string, password: string): Promise<ActionResult> {
+  const supabase = createClient();
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  return error ? { ok: false, error: "Email o contraseña incorrectos." } : { ok: true };
+}
+
+export async function signOut() {
+  await createClient().auth.signOut();
+}
+
+/** Returns the admin's email, or null when signed out / not an approved admin. */
+export async function getAdminStatus(): Promise<
+  { state: "signed-out" } | { state: "not-admin"; email: string } | { state: "admin"; email: string }
+> {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) return { state: "signed-out" };
+
+  const { data: admin } = await supabase
+    .from("kingdom_admins")
+    .select("email")
+    .eq("user_id", data.user.id)
+    .maybeSingle();
+  return admin
+    ? { state: "admin", email: admin.email }
+    : { state: "not-admin", email: data.user.email ?? "" };
+}
+
+// ----------------------------------------------------------------- reads --
+
+export async function getSections(): Promise<SectionRow[]> {
+  const { data, error } = await createClient()
+    .from("kingdom_sections")
+    .select("*")
+    .order("section_group", { ascending: true })
+    .order("sort_order", { ascending: true });
+  if (error) throw error;
+  return data as SectionRow[];
+}
+
+/** Section row plus every field value and item (hidden ones included), for editing. */
+export async function getSectionDraft(key: string): Promise<{
+  section: SectionRow | null;
+  fields: FieldValueRow[];
+  items: ItemRow[];
+}> {
+  const supabase = createClient();
+
+  const [{ data: section, error: e1 }, { data: items, error: e2 }, { data: sectionFields, error: e3 }] =
+    await Promise.all([
+      supabase.from("kingdom_sections").select("*").eq("key", key).maybeSingle(),
+      supabase.from("kingdom_items").select("*").eq("section_key", key).order("sort_order", { ascending: true }),
+      supabase.from("kingdom_field_values").select("*").eq("owner_type", "section").eq("owner_id", key),
+    ]);
+  if (e1) throw e1;
+  if (e2) throw e2;
+  if (e3) throw e3;
+
+  const itemIds = (items as ItemRow[]).map((i) => i.id);
+  let itemFields: FieldValueRow[] = [];
+  if (itemIds.length > 0) {
+    const { data, error } = await supabase
+      .from("kingdom_field_values")
+      .select("*")
+      .eq("owner_type", "item")
+      .in("owner_id", itemIds);
+    if (error) throw error;
+    itemFields = data as FieldValueRow[];
+  }
+
+  return {
+    section: section as SectionRow | null,
+    fields: [...(sectionFields as FieldValueRow[]), ...itemFields],
+    items: items as ItemRow[],
+  };
+}
+
+export async function getPublishHistory(): Promise<
+  Array<{ id: number; note: string | null; published_at: string }>
+> {
+  const { data, error } = await createClient()
+    .from("kingdom_publish_log")
+    .select("id, note, published_at")
+    .order("published_at", { ascending: false })
+    .limit(30);
+  if (error) throw error;
+  return data;
+}
+
+/** PostgREST caps each response (1000 rows by default), so read in pages. */
+async function fetchAllFieldValues(): Promise<FieldValueRow[]> {
+  const PAGE = 1000;
+  const rows: FieldValueRow[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await createClient()
+      .from("kingdom_field_values")
+      .select("*")
+      .order("id", { ascending: true })
+      .range(from, from + PAGE - 1);
+    if (error) throw error;
+    rows.push(...(data as FieldValueRow[]));
+    if (data.length < PAGE) return rows;
+  }
+}
+
+async function buildDraftSnapshot(): Promise<PublishedSnapshot> {
+  const supabase = createClient();
+  const [{ data: sections, error: e1 }, { data: items, error: e2 }, f] = await Promise.all([
+    supabase.from("kingdom_sections").select("*").order("sort_order", { ascending: true }),
+    supabase.from("kingdom_items").select("*").eq("is_visible", true).order("sort_order", { ascending: true }),
+    fetchAllFieldValues(),
+  ]);
+  if (e1) throw e1;
+  if (e2) throw e2;
+
+  const s = sections as SectionRow[];
+  const i = items as ItemRow[];
+  return {
+    en: buildLocaleContent(s, i, f, "en"),
+    es: buildLocaleContent(s, i, f, "es"),
+    sections: s.map((row) => ({
+      key: row.key,
+      label: row.label,
+      group: row.section_group,
+      sortOrder: row.sort_order,
+      isVisible: row.is_visible,
+      isHideable: row.is_hideable,
+      isReorderable: row.is_reorderable,
+    })),
+  };
+}
+
+export const getPreviewSnapshot = buildDraftSnapshot;
 
 // ---------------------------------------------------------------- fields --
 
@@ -22,18 +171,17 @@ export async function saveFieldValue(input: {
   locale: Locale;
   value: string;
 }): Promise<ActionResult> {
-  const supabase = await createClient();
   try {
-    const user = await requireAdmin(supabase);
-    const { error } = await supabase.from("kingdom_field_values").upsert(
+    const userId = await currentUserId();
+    const { error } = await createClient().from("kingdom_field_values").upsert(
       {
         owner_type: input.ownerType,
         owner_id: input.ownerId,
         field_key: input.fieldKey,
         locale: input.locale,
         value: input.value,
-        updated_by: user.id,
-        updated_at: new Date().toISOString(),
+        updated_by: userId,
+        updated_at: now(),
       },
       { onConflict: "owner_type,owner_id,field_key,locale" },
     );
@@ -50,48 +198,35 @@ export async function createItem(input: {
   sectionKey: string;
   parentItemId: string | null;
   groupKey: string;
+  sortOrder: number;
   flags?: Record<string, unknown>;
-}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
-  const supabase = await createClient();
+}): Promise<{ ok: true; item: ItemRow } | { ok: false; error: string }> {
   try {
-    const user = await requireAdmin(supabase);
-
-    let siblingsQuery = supabase
+    const userId = await currentUserId();
+    const { data, error } = await createClient()
       .from("kingdom_items")
-      .select("sort_order")
-      .eq("section_key", input.sectionKey)
-      .eq("group_key", input.groupKey);
-    siblingsQuery =
-      input.parentItemId === null
-        ? siblingsQuery.is("parent_item_id", null)
-        : siblingsQuery.eq("parent_item_id", input.parentItemId);
-    const { data: siblings, error: sErr } = await siblingsQuery.order("sort_order", { ascending: false }).limit(1);
-    if (sErr) throw sErr;
-    const nextOrder = siblings && siblings.length > 0 ? siblings[0].sort_order + 1 : 0;
-
-    const id = randomUUID();
-    const { error } = await supabase.from("kingdom_items").insert({
-      id,
-      section_key: input.sectionKey,
-      parent_item_id: input.parentItemId,
-      group_key: input.groupKey,
-      item_key: `item-${Date.now()}`,
-      sort_order: nextOrder,
-      flags: input.flags ?? {},
-      updated_by: user.id,
-    });
+      .insert({
+        section_key: input.sectionKey,
+        parent_item_id: input.parentItemId,
+        group_key: input.groupKey,
+        item_key: `item-${Date.now()}`,
+        sort_order: input.sortOrder,
+        flags: input.flags ?? {},
+        updated_by: userId,
+      })
+      .select("*")
+      .single();
     if (error) throw error;
-    return { ok: true, id };
+    return { ok: true, item: data as ItemRow };
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "Unexpected error." };
+    const r = fail(e);
+    return { ok: false, error: r.ok ? "" : r.error };
   }
 }
 
 export async function deleteItem(id: string): Promise<ActionResult> {
-  const supabase = await createClient();
   try {
-    await requireAdmin(supabase);
-    const { error } = await supabase.from("kingdom_items").delete().eq("id", id);
+    const { error } = await createClient().from("kingdom_items").delete().eq("id", id);
     if (error) throw error;
     return { ok: true };
   } catch (e) {
@@ -99,13 +234,12 @@ export async function deleteItem(id: string): Promise<ActionResult> {
   }
 }
 
-export async function setItemVisibility(id: string, isVisible: boolean): Promise<ActionResult> {
-  const supabase = await createClient();
+async function updateItem(id: string, patch: Partial<ItemRow>): Promise<ActionResult> {
   try {
-    const user = await requireAdmin(supabase);
-    const { error } = await supabase
+    const userId = await currentUserId();
+    const { error } = await createClient()
       .from("kingdom_items")
-      .update({ is_visible: isVisible, updated_by: user.id, updated_at: new Date().toISOString() })
+      .update({ ...patch, updated_by: userId, updated_at: now() })
       .eq("id", id);
     if (error) throw error;
     return { ok: true };
@@ -114,56 +248,26 @@ export async function setItemVisibility(id: string, isVisible: boolean): Promise
   }
 }
 
-export async function setItemFlags(id: string, flags: Record<string, unknown>): Promise<ActionResult> {
-  const supabase = await createClient();
-  try {
-    const user = await requireAdmin(supabase);
-    const { error } = await supabase
-      .from("kingdom_items")
-      .update({ flags, updated_by: user.id, updated_at: new Date().toISOString() })
-      .eq("id", id);
-    if (error) throw error;
-    return { ok: true };
-  } catch (e) {
-    return fail(e);
-  }
-}
+export const setItemVisibility = (id: string, isVisible: boolean) => updateItem(id, { is_visible: isVisible });
+export const setItemFlags = (id: string, flags: Record<string, unknown>) => updateItem(id, { flags });
 
 /** Reorders a group of sibling items to match the given id order. */
 export async function reorderItems(ids: string[]): Promise<ActionResult> {
-  const supabase = await createClient();
-  try {
-    const user = await requireAdmin(supabase);
-    for (let i = 0; i < ids.length; i++) {
-      const { error } = await supabase
-        .from("kingdom_items")
-        .update({ sort_order: i, updated_by: user.id, updated_at: new Date().toISOString() })
-        .eq("id", ids[i]);
-      if (error) throw error;
-    }
-    return { ok: true };
-  } catch (e) {
-    return fail(e);
+  for (let i = 0; i < ids.length; i++) {
+    const res = await updateItem(ids[i], { sort_order: i });
+    if (!res.ok) return res;
   }
+  return { ok: true };
 }
 
 // -------------------------------------------------------------- sections --
 
-export async function setSectionVisibility(key: string, isVisible: boolean): Promise<ActionResult> {
-  const supabase = await createClient();
+async function updateSection(key: string, patch: Partial<SectionRow>): Promise<ActionResult> {
   try {
-    const user = await requireAdmin(supabase);
-    const { data: section, error: sErr } = await supabase
+    const userId = await currentUserId();
+    const { error } = await createClient()
       .from("kingdom_sections")
-      .select("is_hideable")
-      .eq("key", key)
-      .single();
-    if (sErr) throw sErr;
-    if (!section.is_hideable && !isVisible) throw new Error("This section can't be hidden.");
-
-    const { error } = await supabase
-      .from("kingdom_sections")
-      .update({ is_visible: isVisible, updated_by: user.id, updated_at: new Date().toISOString() })
+      .update({ ...patch, updated_by: userId, updated_at: now() })
       .eq("key", key);
     if (error) throw error;
     return { ok: true };
@@ -172,23 +276,15 @@ export async function setSectionVisibility(key: string, isVisible: boolean): Pro
   }
 }
 
-/** Reorders the reorderable homepage sections to match the given key order. */
+export const setSectionVisibility = (key: string, isVisible: boolean) => updateSection(key, { is_visible: isVisible });
+
+/** Reorders the homepage sections to match the given key order. */
 export async function reorderSections(keys: string[]): Promise<ActionResult> {
-  const supabase = await createClient();
-  try {
-    const user = await requireAdmin(supabase);
-    for (let i = 0; i < keys.length; i++) {
-      const { error } = await supabase
-        .from("kingdom_sections")
-        .update({ sort_order: i + 1, updated_by: user.id, updated_at: new Date().toISOString() })
-        .eq("key", keys[i])
-        .eq("is_reorderable", true);
-      if (error) throw error;
-    }
-    return { ok: true };
-  } catch (e) {
-    return fail(e);
+  for (let i = 0; i < keys.length; i++) {
+    const res = await updateSection(keys[i], { sort_order: i + 1 });
+    if (!res.ok) return res;
   }
+  return { ok: true };
 }
 
 // ---------------------------------------------------------------- images --
@@ -200,164 +296,71 @@ export async function uploadItemImage(
   itemId: string,
   file: File,
 ): Promise<{ ok: true; url: string } | { ok: false; error: string }> {
-  const supabase = await createClient();
-  try {
-    await requireAdmin(supabase);
-
-    if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-      throw new Error(`Unsupported file type: ${file.type}`);
-    }
-    if (file.size > MAX_IMAGE_BYTES) {
-      throw new Error("File is larger than 5MB.");
-    }
-
-    const ext = file.name.split(".").pop() ?? "bin";
-    const path = `items/${itemId}-${Date.now()}.${ext}`;
-
-    const { error: upErr } = await supabase.storage.from("kingdom-media").upload(path, file, {
-      contentType: file.type,
-      upsert: false,
-    });
-    if (upErr) throw upErr;
-
-    const { data: pub } = supabase.storage.from("kingdom-media").getPublicUrl(path);
-
-    const user = await requireAdmin(supabase);
-    const { error } = await supabase
-      .from("kingdom_items")
-      .update({ image_url: pub.publicUrl, updated_by: user.id, updated_at: new Date().toISOString() })
-      .eq("id", itemId);
-    if (error) throw error;
-
-    return { ok: true, url: pub.publicUrl };
-  } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "Unexpected error." };
+  if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
+    return { ok: false, error: "Formato no permitido. Usa PNG, JPG, WEBP, GIF o SVG." };
   }
+  if (file.size > MAX_IMAGE_BYTES) {
+    return { ok: false, error: "La imagen pesa más de 5 MB." };
+  }
+
+  const supabase = createClient();
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "bin";
+  const path = `items/${itemId}-${Date.now()}.${ext}`;
+
+  const { error: upErr } = await supabase.storage
+    .from("kingdom-media")
+    .upload(path, file, { contentType: file.type, cacheControl: "31536000", upsert: false });
+  if (upErr) return { ok: false, error: upErr.message };
+
+  const { data: pub } = supabase.storage.from("kingdom-media").getPublicUrl(path);
+  const res = await updateItem(itemId, { image_url: pub.publicUrl });
+  return res.ok ? { ok: true, url: pub.publicUrl } : res;
 }
 
 // -------------------------------------------------------------- publish --
 
-async function fetchAllDraft(supabase: Awaited<ReturnType<typeof createClient>>) {
-  const [{ data: sections, error: e1 }, { data: items, error: e2 }, { data: fields, error: e3 }] = await Promise.all([
-    supabase.from("kingdom_sections").select("*").order("sort_order", { ascending: true }),
-    supabase.from("kingdom_items").select("*").eq("is_visible", true).order("sort_order", { ascending: true }),
-    supabase.from("kingdom_field_values").select("*"),
-  ]);
-  if (e1) throw e1;
-  if (e2) throw e2;
-  if (e3) throw e3;
-  return {
-    sections: sections as SectionRow[],
-    items: items as ItemRow[],
-    fields: fields as FieldValueRow[],
-  };
-}
-
-function buildSnapshot(sections: SectionRow[], items: ItemRow[], fields: FieldValueRow[]): PublishedSnapshot {
-  return {
-    en: buildLocaleContent(sections, items, fields, "en"),
-    es: buildLocaleContent(sections, items, fields, "es"),
-    sections: sections.map((s) => ({
-      key: s.key,
-      label: s.label,
-      group: s.section_group,
-      sortOrder: s.sort_order,
-      isVisible: s.is_visible,
-      isHideable: s.is_hideable,
-      isReorderable: s.is_reorderable,
-    })),
-  };
-}
-
-export async function publishDraft(note?: string): Promise<ActionResult> {
-  const supabase = await createClient();
+async function setPublished(snapshot: unknown, note: string | null): Promise<ActionResult> {
   try {
-    const user = await requireAdmin(supabase);
-    const { sections, items, fields } = await fetchAllDraft(supabase);
-    const snapshot = buildSnapshot(sections, items, fields);
+    const userId = await currentUserId();
+    const supabase = createClient();
 
     const { data: log, error: logErr } = await supabase
       .from("kingdom_publish_log")
-      .insert({ snapshot: snapshot as unknown as object, note: note ?? null, published_by: user.id })
+      .insert({ snapshot, note, published_by: userId })
       .select("id")
       .single();
     if (logErr) throw logErr;
 
-    const { error: pubErr } = await supabase.from("kingdom_published").upsert({
-      id: true,
-      snapshot: snapshot as unknown as object,
-      log_id: log.id,
-      updated_at: new Date().toISOString(),
-    });
+    const { error: pubErr } = await supabase
+      .from("kingdom_published")
+      .upsert({ id: true, snapshot, log_id: log.id, updated_at: now() });
     if (pubErr) throw pubErr;
-
-    revalidatePath("/en");
-    revalidatePath("/es");
     return { ok: true };
   } catch (e) {
     return fail(e);
   }
 }
 
-export async function getPublishHistory(): Promise<
-  Array<{ id: number; note: string | null; published_at: string; published_by: string | null }>
-> {
-  const supabase = await createClient();
-  await requireAdmin(supabase);
-  const { data, error } = await supabase
-    .from("kingdom_publish_log")
-    .select("id, note, published_at, published_by")
-    .order("published_at", { ascending: false })
-    .limit(30);
-  if (error) throw error;
-  return data;
+export async function publishDraft(note?: string): Promise<ActionResult> {
+  try {
+    const snapshot = await buildDraftSnapshot();
+    return setPublished(snapshot, note || null);
+  } catch (e) {
+    return fail(e);
+  }
 }
 
 /** Restores a previous published snapshot. Recorded as a new log entry — history is append-only. */
 export async function rollbackToLog(logId: number): Promise<ActionResult> {
-  const supabase = await createClient();
   try {
-    const user = await requireAdmin(supabase);
-    const { data: log, error: logErr } = await supabase
+    const { data, error } = await createClient()
       .from("kingdom_publish_log")
       .select("snapshot")
       .eq("id", logId)
       .single();
-    if (logErr) throw logErr;
-
-    const { data: newLog, error: insErr } = await supabase
-      .from("kingdom_publish_log")
-      .insert({ snapshot: log.snapshot, note: `Rollback to version #${logId}`, published_by: user.id })
-      .select("id")
-      .single();
-    if (insErr) throw insErr;
-
-    const { error: pubErr } = await supabase.from("kingdom_published").upsert({
-      id: true,
-      snapshot: log.snapshot,
-      log_id: newLog.id,
-      updated_at: new Date().toISOString(),
-    });
-    if (pubErr) throw pubErr;
-
-    revalidatePath("/en");
-    revalidatePath("/es");
-    return { ok: true };
+    if (error) throw error;
+    return setPublished(data.snapshot, `Restaurada la versión #${logId}`);
   } catch (e) {
     return fail(e);
   }
-}
-
-export async function getPreviewSnapshot(): Promise<PublishedSnapshot> {
-  const supabase = await createClient();
-  await requireAdmin(supabase);
-  const [{ data: sections, error: e1 }, { data: items, error: e2 }, { data: fields, error: e3 }] = await Promise.all([
-    supabase.from("kingdom_sections").select("*").order("sort_order", { ascending: true }),
-    supabase.from("kingdom_items").select("*").eq("is_visible", true).order("sort_order", { ascending: true }),
-    supabase.from("kingdom_field_values").select("*"),
-  ]);
-  if (e1) throw e1;
-  if (e2) throw e2;
-  if (e3) throw e3;
-  return buildSnapshot(sections as SectionRow[], items as ItemRow[], fields as FieldValueRow[]);
 }

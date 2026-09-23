@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -8,28 +7,7 @@ import { LenisProvider } from "@/components/providers/lenis-provider";
 import { AnalyticsProvider } from "@/components/providers/analytics-provider";
 import { env } from "@/lib/env";
 import { organizationSchema, localBusinessSchema, jsonLdScript } from "@/lib/schema";
-
-// Display / headings — geometric, premium, Apple-adjacent.
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-// Body / UI — Vercel's Geist, closest web equivalent to SF Pro Text.
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-});
-
-// Mono — eyebrows, metrics, ROI calculator.
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
-});
+import { fontVariables } from "@/lib/fonts";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -48,13 +26,13 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `/${locale}`,
-      languages: { en: "/en", es: "/es", "x-default": "/en" },
+      canonical: `/${locale}/`,
+      languages: { en: "/en/", es: "/es/", "x-default": "/en/" },
     },
     openGraph: {
       type: "website",
       locale: locale === "es" ? "es_ES" : "en_US",
-      url: `${env.siteUrl}/${locale}`,
+      url: `${env.siteUrl}/${locale}/`,
       siteName: "Kingdom Media Hub",
       title: t("title"),
       description: t("description"),
@@ -82,7 +60,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${jakarta.variable} ${geist.variable} ${geistMono.variable}`}
+      className={fontVariables}
       suppressHydrationWarning
     >
       <head>

@@ -22,8 +22,9 @@ function buildItemNode(
   // A "string item" (e.g. a bullet point, a client logo) has exactly one
   // field named 'value' and nothing nested under it — it renders as a bare
   // string in the array, matching the original messages/*.json shape.
-  if (children.length === 0 && fields.length === 1 && fields[0].field_key === "value") {
-    return fields[0].value;
+  const textFields = fields.filter((f) => f.field_key !== "imageAlt");
+  if (children.length === 0 && textFields.length === 1 && textFields[0].field_key === "value") {
+    return textFields[0].value;
   }
 
   const node: Record<string, unknown> = { id: item.item_key, ...item.flags };
