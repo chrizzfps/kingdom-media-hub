@@ -32,6 +32,10 @@ const cta = cva(
           "rounded-full bg-ink text-white",
           "hover:-translate-y-0.5 hover:bg-dark-2",
         ],
+        "outline-dark": [
+          "rounded-full border border-white/30 bg-white/[0.06] text-white",
+          "hover:-translate-y-0.5 hover:border-cyan/50 hover:bg-white/10",
+        ],
       },
       size: {
         sm: "h-9 px-4 text-sm",

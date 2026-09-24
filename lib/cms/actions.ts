@@ -292,6 +292,9 @@ export async function reorderSections(keys: string[]): Promise<ActionResult> {
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(["image/png", "image/jpeg", "image/webp", "image/gif", "image/svg+xml"]);
 
+const MAX_VIDEO_BYTES = 20 * 1024 * 1024;
+const ALLOWED_VIDEO_TYPES = new Set(["video/mp4"]);
+
 export async function uploadItemImage(
   itemId: string,
   file: File,
@@ -315,6 +318,44 @@ export async function uploadItemImage(
   const { data: pub } = supabase.storage.from("kingdom-media").getPublicUrl(path);
   const res = await updateItem(itemId, { image_url: pub.publicUrl });
   return res.ok ? { ok: true, url: pub.publicUrl } : res;
+}
+
+/**
+ * Uploads a file (image or video) into an item's `flags` object instead of
+ * the dedicated `image_url` column — used for fields that don't fit that
+ * column, e.g. an optional hero background video or a mobile-crop image.
+ * Only uploads to storage; the caller persists the returned URL via
+ * `setItemFlags` so there's a single write path for the flags object.
+ */
+export async function uploadItemFlagFile(
+  itemId: string,
+  flagKey: string,
+  file: File,
+  kind: "image" | "video",
+): Promise<{ ok: true; url: string } | { ok: false; error: string }> {
+  const allowed = kind === "video" ? ALLOWED_VIDEO_TYPES : ALLOWED_IMAGE_TYPES;
+  const maxBytes = kind === "video" ? MAX_VIDEO_BYTES : MAX_IMAGE_BYTES;
+  if (!allowed.has(file.type)) {
+    return {
+      ok: false,
+      error: kind === "video" ? "Formato no permitido. Usa MP4." : "Formato no permitido. Usa PNG, JPG, WEBP, GIF o SVG.",
+    };
+  }
+  if (file.size > maxBytes) {
+    return { ok: false, error: `El archivo pesa más de ${maxBytes / (1024 * 1024)} MB.` };
+  }
+
+  const supabase = createClient();
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "bin";
+  const path = `items/${itemId}-${flagKey}-${Date.now()}.${ext}`;
+
+  const { error: upErr } = await supabase.storage
+    .from("kingdom-media")
+    .upload(path, file, { contentType: file.type, cacheControl: "31536000", upsert: false });
+  if (upErr) return { ok: false, error: upErr.message };
+
+  const { data: pub } = supabase.storage.from("kingdom-media").getPublicUrl(path);
+  return { ok: true, url: pub.publicUrl };
 }
 
 // -------------------------------------------------------------- publish --

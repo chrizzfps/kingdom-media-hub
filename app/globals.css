@@ -27,22 +27,24 @@
 
   /* ── Accent cyan — 20% usage rule ───────────────────────── */
   /* Reserved for: CTAs, key metrics, ROI numbers, hover states */
-  --color-cyan: #33CCFF;
-  --color-cyan-soft: #A5E9FF;
-  --color-cyan-deep: #0099CC;
-  --color-cyan-glow: rgba(51, 204, 255, 0.35);
+  --color-cyan: #00C4F0;
+  --color-cyan-soft: #E0F7FD;
+  --color-cyan-deep: #0082A6;
+  --color-cyan-glow: rgba(0, 196, 240, 0.15);
+  --color-mint: #00D084;
 
   /* ── Glass edges ──────────────────────────────────────────── */
-  --color-glass-border: rgba(255, 255, 255, 0.80);
-  --color-glass-border-dark: rgba(255, 255, 255, 0.10);
-  --color-edge: rgba(0, 0, 0, 0.06);
-  --color-edge-strong: rgba(0, 0, 0, 0.10);
-  --color-cyan-edge: rgba(51, 204, 255, 0.25);
+  --color-glass-border: rgba(255, 255, 255, 0.85);
+  --color-glass-border-dark: rgba(255, 255, 255, 0.08);
+  --color-edge: rgba(15, 23, 42, 0.06);
+  --color-edge-strong: rgba(15, 23, 42, 0.12);
+  --color-cyan-edge: rgba(0, 196, 240, 0.20);
 
   /* ── Typefaces (wired via next/font) ─────────────────────── */
   --font-display: var(--font-jakarta), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, Cambria, serif;
   --font-sans: var(--font-geist), system-ui, sans-serif;
-  --font-mono: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 
   /* ── Motion ──────────────────────────────────────────────── */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);

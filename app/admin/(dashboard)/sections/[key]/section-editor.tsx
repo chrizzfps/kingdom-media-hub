@@ -8,6 +8,7 @@ import {
   setItemFlags,
   setItemVisibility,
   setSectionVisibility,
+  uploadItemFlagFile,
   uploadItemImage,
 } from "@/lib/cms/actions";
 import { humanizeFieldKey, humanizeGroupKey } from "@/lib/cms/format";
@@ -367,9 +368,17 @@ function LocalizedPair({
   );
 }
 
+// String flags whose value is a file URL get an upload control instead of a
+// text input. The value type (image vs video) is inferred from the key name.
+const FILE_FLAG_KINDS: Record<string, "image" | "video"> = {
+  videoUrl: "video",
+  mobileImageUrl: "image",
+};
+
 function ItemFlags({ item }: { item: ItemRow }) {
   const [flags, setFlags] = useState(item.flags);
   const [error, setError] = useState<string | null>(null);
+  const [pendingKey, setPendingKey] = useState<string | null>(null);
   const keys = Object.keys(flags);
   if (keys.length === 0) return null;
 
@@ -378,6 +387,18 @@ function ItemFlags({ item }: { item: ItemRow }) {
     setFlags(next);
     const res = await setItemFlags(item.id, next);
     setError(res.ok ? null : res.error);
+  }
+
+  async function onFlagFile(k: string, kind: "image" | "video", e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setError(null);
+    setPendingKey(k);
+    const res = await uploadItemFlagFile(item.id, k, file, kind);
+    setPendingKey(null);
+    if (res.ok) await update(k, res.url);
+    else setError(res.error);
   }
 
   return (
@@ -403,6 +424,49 @@ function ItemFlags({ item }: { item: ItemRow }) {
                 className="w-24 rounded border border-gray-300 px-1.5 py-0.5 text-xs"
               />
             </label>
+          );
+        }
+        if (typeof v === "string" && k === "focus") {
+          return (
+            <label key={k} className="flex items-center gap-1.5 text-xs text-gray-600">
+              {humanizeFieldKey(k)}
+              <select
+                value={v || "center"}
+                onChange={(e) => update(k, e.target.value)}
+                className="rounded border border-gray-300 px-1.5 py-0.5 text-xs"
+              >
+                <option value="top">Arriba</option>
+                <option value="center">Centro</option>
+                <option value="bottom">Abajo</option>
+              </select>
+            </label>
+          );
+        }
+        if (typeof v === "string" && k in FILE_FLAG_KINDS) {
+          const kind = FILE_FLAG_KINDS[k];
+          const isPending = pendingKey === k;
+          return (
+            <div key={k} className="flex items-center gap-2 text-xs text-gray-600">
+              <span>{humanizeFieldKey(k)}</span>
+              {v && <span className="max-w-[9rem] truncate text-gray-400">{v.split("/").pop()}</span>}
+              <label className="cursor-pointer text-cyan-600 hover:underline">
+                {isPending ? "Subiendo…" : v ? "Reemplazar" : "Añadir"}
+                <input
+                  type="file"
+                  accept={kind === "video" ? "video/mp4" : "image/png,image/jpeg,image/webp,image/gif,image/svg+xml"}
+                  onChange={(e) => onFlagFile(k, kind, e)}
+                  className="hidden"
+                />
+              </label>
+              {v && !isPending && (
+                <button type="button" onClick={() => update(k, "")} className="text-red-500 hover:underline">
+                  Quitar
+                </button>
+              )}
+              <span className="text-[10px] text-gray-400">
+                {kind === "video" ? "MP4 · máx. 20 MB" : "Imagen · máx. 5 MB"}
+              </span>
+            </div>
           );
         }
         return null;
