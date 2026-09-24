@@ -375,6 +375,9 @@ const FILE_FLAG_KINDS: Record<string, "image" | "video"> = {
   mobileImageUrl: "image",
 };
 
+// Matches the hero section's flat fallback background (--color-dark).
+const DEFAULT_BACKGROUND_COLOR = "#0f172a";
+
 function ItemFlags({ item }: { item: ItemRow }) {
   const [flags, setFlags] = useState(item.flags);
   const [error, setError] = useState<string | null>(null);
@@ -440,6 +443,27 @@ function ItemFlags({ item }: { item: ItemRow }) {
                 <option value="bottom">Abajo</option>
               </select>
             </label>
+          );
+        }
+        if (typeof v === "string" && k === "backgroundColor") {
+          return (
+            <div key={k} className="flex items-center gap-2 text-xs text-gray-600">
+              <span>{humanizeFieldKey(k)}</span>
+              <input
+                type="color"
+                value={v || DEFAULT_BACKGROUND_COLOR}
+                onChange={(e) => update(k, e.target.value)}
+                className="h-7 w-10 cursor-pointer rounded border border-gray-300 p-0.5"
+              />
+              <span className="font-mono text-[11px] text-gray-400">
+                {v || `${DEFAULT_BACKGROUND_COLOR} (por defecto)`}
+              </span>
+              {v && (
+                <button type="button" onClick={() => update(k, "")} className="text-red-500 hover:underline">
+                  Restablecer
+                </button>
+              )}
+            </div>
           );
         }
         if (typeof v === "string" && k in FILE_FLAG_KINDS) {

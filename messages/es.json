@@ -28,17 +28,10 @@
     "language": "Idioma"
   },
   "hero": {
-    "eyebrow": "Sistemas de Crecimiento · IA · Automatización",
     "titleLine1": "Construimos sistemas que",
     "titleAccent": "hacen crecer tu negocio",
     "titleLine2": "mientras duermes",
     "subtitle": "Asistentes virtuales con IA, automatización, sitios web de conversión y motores de contenido — diseñados para generar más prospectos, citas y ventas.",
-    "trust": {
-      "a": "Expertos en Automatización IA",
-      "b": "Sistemas de Crecimiento",
-      "c": "Webs de Conversión",
-      "d": "Europa · LATAM · USA"
-    },
     "cards": {
       "appointments": "+42 citas",
       "appointmentsLabel": "Reservadas hoy",

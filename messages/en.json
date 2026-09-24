@@ -28,17 +28,10 @@
     "language": "Language"
   },
   "hero": {
-    "eyebrow": "Growth Systems · AI · Automation",
     "titleLine1": "We build systems that",
     "titleAccent": "grow your business",
     "titleLine2": "while you sleep",
     "subtitle": "AI-powered virtual assistants, automation, conversion websites and content engines — engineered to generate more leads, appointments and revenue.",
-    "trust": {
-      "a": "AI Automation Experts",
-      "b": "Revenue Growth Systems",
-      "c": "Conversion Websites",
-      "d": "Europe · LATAM · USA"
-    },
     "cards": {
       "appointments": "+42 appointments",
       "appointmentsLabel": "Booked today",
