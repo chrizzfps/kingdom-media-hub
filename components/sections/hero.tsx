@@ -73,7 +73,7 @@ export function Hero() {
       {/* Main hero content container */}
       <div className="relative z-10 mx-auto w-full max-w-5xl px-5 text-center sm:px-8">
         {/* Primary headline: Visible immediately in initial frame (no opacity: 0) */}
-        <h1 className="font-display font-extrabold text-white tracking-[-0.035em] leading-[1.02] text-4xl sm:text-6xl lg:text-[4.65rem]">
+        <h1 className="font-display font-extrabold text-white tracking-[-0.035em] leading-[1.02] text-4xl sm:text-6xl lg:text-[4.65rem] text-balance sm:text-wrap">
           <span className="block">{t("titleLine1")}</span>
           <span className="block font-serif font-medium italic text-[#66ffcc]">{t("titleAccent")}</span>
           <span className="block">{t("titleLine2")}</span>

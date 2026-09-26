@@ -1,11 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
-import { ScrollProgress } from "@/components/cro/scroll-progress";
-import { StickyMobileCTA } from "@/components/cro/sticky-mobile-cta";
-import { FloatingWhatsApp } from "@/components/cro/floating-whatsapp";
-import { SECTION_REGISTRY, homepageOrder } from "@/components/sections/registry";
 import { getPublishedContent } from "@/lib/cms/get-published";
+import type { Locale } from "@/lib/cms/types";
+import { HomeClient } from "./home-client";
 
 export default async function HomePage({
   params,
@@ -15,22 +11,10 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Read at build time: publishing in /admin takes effect on the next build + upload.
-  const order = homepageOrder(await getPublishedContent());
+  // Baked at build time as the initial paint (SEO, no flash). HomeClient
+  // re-fetches the published snapshot in the browser right after, so a
+  // publish in /admin shows up on the next page load without a rebuild.
+  const initialSnapshot = await getPublishedContent();
 
-  return (
-    <>
-      <ScrollProgress />
-      <Navbar />
-      <main>
-        {order.map((key) => {
-          const Section = SECTION_REGISTRY[key];
-          return Section ? <Section key={key} /> : null;
-        })}
-      </main>
-      <Footer />
-      <StickyMobileCTA />
-      <FloatingWhatsApp />
-    </>
-  );
+  return <HomeClient locale={locale as Locale} initialSnapshot={initialSnapshot} />;
 }
