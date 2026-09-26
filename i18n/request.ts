@@ -10,10 +10,25 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
+  const localMessages = (await import(`../messages/${locale}.json`)).default;
   const published = await getPublishedContent();
+
+  // Deep-merge local messages with published CMS content so newly introduced keys
+  // always have a fallback.
   const messages = published
-    ? published[locale]
-    : (await import(`../messages/${locale}.json`)).default;
+    ? {
+        ...localMessages,
+        ...published[locale],
+        footer: {
+          ...localMessages.footer,
+          ...(published[locale]?.footer ?? {}),
+        },
+        nav: {
+          ...localMessages.nav,
+          ...(published[locale]?.nav ?? {}),
+        },
+      }
+    : localMessages;
 
   return { locale, messages };
 });

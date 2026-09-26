@@ -16,7 +16,6 @@ export function FAQ() {
     <section id="faq" className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow={t("eyebrow")}
           title={t("title")}
           align="center"
           className="mb-12"

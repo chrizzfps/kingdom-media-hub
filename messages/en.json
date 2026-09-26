@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Kingdom Media Hub — Automated Growth Systems for Ambitious Brands",
-    "description": "We build revenue-generating digital systems: AI-powered virtual assistants, automation, conversion websites and content engines that generate more leads, appointments and sales. Europe · LATAM · USA."
+    "title": "Kingdom Media Hub: Automated Growth Systems for Ambitious Brands",
+    "description": "We build revenue-generating digital systems: AI-powered virtual assistants, automation, conversion websites and content engines that generate more leads, appointments and sales. Europe, LATAM and USA."
   },
   "common": {
     "growthAudit": "Get a Growth Audit",
     "bookConsultation": "Book Free Consultation",
-    "bookCall": "Book an Audit",
+    "bookCall": "Get a Growth Audit",
     "whatsapp": "WhatsApp",
     "recoverRevenue": "Recover Lost Revenue",
     "watchDemo": "Watch AI Demo",
@@ -31,7 +31,7 @@
     "titleLine1": "We build systems that",
     "titleAccent": "grow your business",
     "titleLine2": "while you sleep",
-    "subtitle": "AI-powered virtual assistants, automation, conversion websites and content engines — engineered to generate more leads, appointments and revenue.",
+    "subtitle": "AI-powered virtual assistants, automation, conversion websites and content engines, engineered to generate more leads, appointments and revenue.",
     "cards": {
       "appointments": "+42 appointments",
       "appointmentsLabel": "Booked today",
@@ -58,7 +58,7 @@
   "ecosystem": {
     "eyebrow": "The Kingdom Ecosystem",
     "title": "Three engines, one growth machine",
-    "subtitle": "Most agencies sell you a service. We operate a connected system — demand, conversion and capability reinforcing each other.",
+    "subtitle": "Most agencies sell you a service. We operate a connected system: demand, conversion and capability reinforcing each other.",
     "coreTitle": "Kingdom Core",
     "coreDesc": "Media Lab creates the demand. Agency converts it into revenue. Academy multiplies your team's capability. Each engine feeds the next.",
     "agency": {
@@ -105,17 +105,16 @@
     "resultLabel": "Potential revenue lost monthly",
     "resultYearLabel": "That's",
     "resultYearSuffix": "per year walking out the door.",
-    "disclaimer": "Estimate based on your inputs. Most leaks are recoverable with AI automation.",
-    "cta": "Recover Lost Revenue"
+    "disclaimer": "Estimate based on your inputs. Most leaks are recoverable with AI automation."
   },
   "agency": {
     "eyebrow": "Kingdom Agency",
     "title": "Your business selling while you sleep",
-    "subtitle": "Outcome-built systems that capture, qualify and convert demand 24/7 — without adding headcount.",
+    "subtitle": "Outcome-built systems that capture, qualify and convert demand 24/7, without adding headcount.",
     "voice": {
       "name": "AI-Powered Virtual Assistants",
       "tagline": "Capture and convert every opportunity, 24/7",
-      "desc": "An AI orchestrator that handles WhatsApp, web and social media, qualifies leads, books into your calendar, and follows up — in your brand's voice, at any hour.",
+      "desc": "An AI orchestrator that handles WhatsApp, web and social media, qualifies leads, books into your calendar, and follows up, in your brand's voice, at any hour.",
       "points": [
         "Replies in seconds across any channel",
         "Books straight into your calendar",
@@ -135,7 +134,7 @@
     "websites": {
       "name": "High-Converting Websites",
       "tagline": "Built to generate revenue",
-      "desc": "Sites engineered for lead generation, authority and sales — not just aesthetics.",
+      "desc": "Sites engineered for lead generation, authority and sales, not just aesthetics.",
       "points": [
         "Conversion-optimized architecture",
         "SEO & AEO ready from day one",
@@ -144,15 +143,15 @@
     },
     "demo": {
       "title": "See an AI Virtual Assistant in action",
-      "desc": "A live example of a virtual assistant capturing an opportunity and booking an appointment — start to finish.",
+      "desc": "A live example of a virtual assistant capturing an opportunity and booking an appointment, start to finish.",
       "soon": "Demo coming online soon. Request a live walkthrough.",
-      "cta": "Book a live walkthrough"
+      "cta": "Book Free Consultation"
     }
   },
   "mediaLab": {
     "eyebrow": "Kingdom Media Lab",
     "title": "Content that builds demand",
-    "subtitle": "Every frame, cut and campaign is engineered to generate measurable business outcomes — not just views.",
+    "subtitle": "Every frame, cut and campaign is engineered to generate measurable business outcomes, not just views.",
     "filters": {
       "all": "All",
       "commercials": "Commercials",
@@ -167,7 +166,7 @@
         "metric": "+212%",
         "metricLabel": "Qualified Leads",
         "description": "Full-funnel content strategy driving qualified traffic and lead capture.",
-        "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80"
+        "imageUrl": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "restaurant-chain",
@@ -176,7 +175,7 @@
         "metric": "+38%",
         "metricLabel": "Reservations",
         "description": "Short-form content series generating consistent reservation uplift.",
-        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80"
+        "imageUrl": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "medical-practice",
@@ -185,7 +184,7 @@
         "metric": "+41%",
         "metricLabel": "New Patients",
         "description": "Brand authority commercial driving new patient acquisition.",
-        "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+        "imageUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "tech-startup",
@@ -194,14 +193,14 @@
         "metric": "3.2×",
         "metricLabel": "ROAS",
         "description": "Launch campaign across paid and organic channels.",
-        "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+        "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
       }
     ]
   },
   "marketing": {
     "eyebrow": "Kingdom Marketing",
     "title": "Your brand, run by a full media lab",
-    "subtitle": "Digital marketing and social media management for businesses that want to stand out — strategy, content, paid media and data operated by one integrated team.",
+    "subtitle": "Digital marketing and social media management for businesses that want to stand out. Strategy, content, paid media and data operated by one integrated team.",
     "services": [
       {
         "key": "social",
@@ -218,7 +217,7 @@
       {
         "key": "branding",
         "name": "Branding & Identity",
-        "desc": "Complete brand systems — visual identity, tone of voice and guidelines that hold up across every piece of content.",
+        "desc": "Complete brand systems: visual identity, tone of voice and guidelines that hold up across every piece of content.",
         "metric": "100% consistency"
       },
       {
@@ -236,13 +235,13 @@
       {
         "key": "analytics",
         "name": "Analytics & Reporting",
-        "desc": "Live dashboards that show exactly what's generating revenue — no guesswork.",
+        "desc": "Live dashboards that show exactly what's generating revenue, no guesswork.",
         "metric": "Live reporting"
       }
     ],
     "team": {
       "title": "One integrated, highly trained team",
-      "desc": "Behind every campaign are strategists, designers, editors and analysts working as one system — not scattered freelancers or a generic agency.",
+      "desc": "Behind every campaign are strategists, designers, editors and analysts working as one system, not scattered freelancers or a generic agency.",
       "stats": [
         {
           "value": "12+",
@@ -257,7 +256,7 @@
           "label": "Continents with active clients"
         }
       ],
-      "cta": "Book a marketing consultation"
+      "cta": "Book Free Consultation"
     }
   },
   "academy": {
@@ -275,7 +274,7 @@
         "id": "marketing",
         "name": "Growth Marketing",
         "desc": "Modern demand generation: organic, paid and conversion frameworks that compound.",
-        "badge": "Real Projects"
+        "badge": "Live Portfolio"
       },
       {
         "id": "ai",
@@ -303,7 +302,7 @@
       {
         "number": "02",
         "name": "Strategy",
-        "desc": "We design the exact system — virtual assistants, automation, content, websites — matched to your goals."
+        "desc": "We design the exact system (virtual assistants, automation, content, websites) matched to your goals."
       },
       {
         "number": "03",
@@ -325,7 +324,7 @@
   "caseStudies": {
     "eyebrow": "Results",
     "title": "Outcomes that speak",
-    "subtitle": "Real results from real businesses. No projections — only what's been delivered.",
+    "subtitle": "Real results from real businesses. No projections: only what's been delivered.",
     "cases": [
       {
         "metric": "+212%",
@@ -352,7 +351,7 @@
     "title": "Trusted by ambitious brands",
     "testimonials": [
       {
-        "quote": "Kingdom didn't just build us a website — they built a lead machine. We went from 12 to 47 qualified leads per month in 90 days.",
+        "quote": "Kingdom didn't just build us a website: they built a lead machine. We went from 12 to 47 qualified leads per month in 90 days.",
         "name": "Carlos Mendez",
         "role": "CEO",
         "company": "Velox Tech",
@@ -432,24 +431,23 @@
         "freelancer": false,
         "kingdom": true
       }
-    ],
-    "badge": "Best choice"
+    ]
   },
   "faq": {
     "eyebrow": "FAQ",
-    "title": "Common questions",
+    "title": "Everything you need to know before you start",
     "items": [
       {
         "q": "What is an AI Virtual Assistant?",
-        "a": "An AI Virtual Assistant is an intelligent system that engages your customers on behalf of your business, 24/7, across WhatsApp, web and social media. It handles customer inquiries, qualifies leads, and books appointments directly into your calendar — in your brand's voice. Unlike a human agent, it never leaves a conversation unanswered."
+        "a": "An AI Virtual Assistant is an intelligent system that engages your customers on behalf of your business, 24/7, across WhatsApp, web and social media. It handles customer inquiries, qualifies leads, and books appointments directly into your calendar, in your brand's voice. Unlike a human agent, it never leaves a conversation unanswered."
       },
       {
         "q": "How much does business automation cost?",
-        "a": "Automation projects at Kingdom Media Hub start at $1,500 for foundational systems and scale based on complexity. Most clients see full ROI within 60–90 days through recovered leads and reduced manual labor. We provide a detailed cost-benefit estimate in your free Growth Audit."
+        "a": "Automation projects at Kingdom Media Hub start at $1,500 for foundational systems and scale based on complexity. Most clients see full ROI within 60-90 days through recovered leads and reduced manual labor. We provide a detailed cost-benefit estimate in your free Growth Audit."
       },
       {
         "q": "How long does a conversion website take to build?",
-        "a": "Our conversion websites are delivered in 4–8 weeks depending on scope. Pricing scales with the complexity of your project and is built for lead generation, authority and sales from day one — not just aesthetics. We include SEO, AEO optimization and conversion architecture in every build."
+        "a": "Our conversion websites are delivered in 4-8 weeks depending on scope. Pricing scales with the complexity of your project and is built for lead generation, authority and sales from day one, not just aesthetics. We include SEO, AEO optimization and conversion architecture in every build."
       },
       {
         "q": "What industries benefit most from automation?",
@@ -461,15 +459,15 @@
       },
       {
         "q": "How can a restaurant recover missed reservations?",
-        "a": "An AI Virtual Assistant answers every inquiry your team misses — after hours, during peak service, or when volume is high. It takes reservation details, confirms bookings, and sends reminders. One of our restaurant clients recovered 38% more reservations in the first 30 days."
+        "a": "An AI Virtual Assistant answers every inquiry your team misses: after hours, during peak service, or when volume is high. It takes reservation details, confirms bookings, and sends reminders. One of our restaurant clients recovered 38% more reservations in the first 30 days."
       },
       {
         "q": "What CRM should a growing business use?",
-        "a": "We work with HubSpot, Pipedrive, and custom CRM configurations depending on your team size and sales process. In your Growth Audit, we map the right stack to your actual workflow — not the one with the highest commission for us."
+        "a": "We work with HubSpot, Pipedrive, and custom CRM configurations depending on your team size and sales process. In your Growth Audit, we map the right stack to your actual workflow, not the one with the highest commission for us."
       },
       {
         "q": "How much ROI can automation generate?",
-        "a": "Our clients typically recover $1,500–$8,000 per month in previously lost revenue within the first 90 days — through recovered opportunities, faster lead follow-up, and eliminated manual work. Use our ROI Calculator above to estimate your specific opportunity."
+        "a": "Our clients typically recover $1,500-$8,000 per month in previously lost revenue within the first 90 days, through recovered opportunities, faster lead follow-up, and eliminated manual work. Use our ROI Calculator above to estimate your specific opportunity."
       }
     ]
   },
@@ -489,7 +487,7 @@
           "CRM integration",
           "30-day optimization"
         ],
-        "cta": "Book an audit",
+        "cta": "Book Free Consultation",
         "popular": false
       },
       {
@@ -505,7 +503,7 @@
           "90-day optimization",
           "Monthly reporting"
         ],
-        "cta": "Book audit",
+        "cta": "Book Free Consultation",
         "popular": true
       },
       {
@@ -521,7 +519,7 @@
           "Priority support",
           "Quarterly strategy reviews"
         ],
-        "cta": "Book a consultation",
+        "cta": "Book Free Consultation",
         "popular": false
       }
     ],
@@ -540,7 +538,7 @@
       "phone": "Phone / WhatsApp",
       "projectType": "What do you need?",
       "message": "Anything else? (optional)",
-      "submit": "Book My Consultation",
+      "submit": "Submit Request",
       "submitting": "Sending…",
       "success": "Received. We'll be in touch within one business day.",
       "error": "Something went wrong. Please try again or message us on WhatsApp.",
@@ -554,8 +552,8 @@
     },
     "revenueBands": {
       "under-10k": "Under $10k",
-      "10k-50k": "$10k – $50k",
-      "50k-250k": "$50k – $250k",
+      "10k-50k": "$10k-$50k",
+      "50k-250k": "$50k-$250k",
       "250k-plus": "$250k+"
     },
     "projectTypes": {
@@ -577,8 +575,8 @@
     },
     "placeholders": {
       "name": "María García",
-      "company": "Acme Corp",
-      "industry": "Technology",
+      "company": "Luna Café",
+      "industry": "Restaurant",
       "email": "hola@empresa.com",
       "phone": "+34 711 251 968",
       "message": "..."
@@ -588,13 +586,15 @@
     "tagline": "We build revenue-generating digital systems for ambitious brands.",
     "ecosystem": "Ecosystem",
     "company": "Company",
-    "getStarted": "Get started",
-    "markets": "Europe · LATAM · USA",
+    "getStarted": "Get a Growth Audit",
     "rights": "All rights reserved.",
-    "privacy": "Privacy",
-    "terms": "Terms"
+    "legalNotice": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "terms": "Terms & Conditions",
+    "cookieSettings": "Cookie Settings"
   },
   "cro": {
-    "whatsappPrefill": "Hi Kingdom Media Hub — I'd like a growth audit for my business."
+    "whatsappPrefill": "Hi Kingdom Media Hub, I'd like a growth audit for my business."
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { WhatsappLogo, CalendarCheck } from "@phosphor-icons/react";
 import { whatsappLink, calendlyLink } from "@/lib/env";
@@ -11,20 +11,15 @@ export function StickyMobileCTA() {
   const tc  = useTranslations("common");
   const tCro = useTranslations("cro");
   const [show, setShow] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    function onScroll() {
-      const y = window.scrollY;
-      const contact = document.getElementById("contact");
-      const nearContact = contact
-        ? contact.getBoundingClientRect().top < window.innerHeight * 0.9
-        : false;
-      setShow(y > window.innerHeight * 0.6 && !nearContact);
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const contact = document.getElementById("contact");
+    const nearContact = contact
+      ? contact.getBoundingClientRect().top < window.innerHeight * 0.9
+      : false;
+    setShow(y > window.innerHeight * 0.6 && !nearContact);
+  });
 
   const wa = whatsappLink(tCro("whatsappPrefill"));
 
@@ -51,10 +46,10 @@ export function StickyMobileCTA() {
           <a
             href={calendlyLink()}
             onClick={() => trackEvent("cta_book_consultation", { location: "sticky_mobile" })}
-            className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-cyan text-sm font-semibold text-ink shadow-[0_4px_16px_rgba(51,204,255,0.35)]"
+            className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-cyan text-sm font-semibold text-ink"
           >
             <CalendarCheck size={18} />
-            {tc("bookCall")}
+            {tc("bookConsultation")}
           </a>
         </motion.div>
       )}

@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { AnalyticsProvider } from "@/components/providers/analytics-provider";
+import { CookieBanner } from "@/components/cro/cookie-banner";
 import { env } from "@/lib/env";
 import { organizationSchema, localBusinessSchema, jsonLdScript } from "@/lib/schema";
 import { fontVariables } from "@/lib/fonts";
@@ -72,6 +73,7 @@ export default async function LocaleLayout({
       <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <NextIntlClientProvider>
           <LenisProvider>{children}</LenisProvider>
+          <CookieBanner />
         </NextIntlClientProvider>
         <AnalyticsProvider />
       </body>

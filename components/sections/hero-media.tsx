@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { HeroSystemDemo } from "./hero-system-demo";
 
 type HeroMediaItem = {
   videoUrl?: string;
@@ -14,10 +13,10 @@ type HeroMediaItem = {
 };
 
 /**
- * Priority: video → image → the built-in system demo. The same image doubles
- * as the video poster, so publishing one asset covers both. Video is skipped
- * entirely on mobile/reduced-motion (never mounted, never downloaded) and any
- * load failure falls through to the next tier rather than showing a broken
+ * Priority: video → image → nothing. The same image doubles as the video
+ * poster, so publishing one asset covers both. Video is skipped entirely on
+ * mobile/reduced-motion (never mounted, never downloaded) and any load
+ * failure falls through to the next tier rather than showing a broken
  * element.
  */
 export function HeroMedia() {
@@ -56,8 +55,6 @@ export function HeroMedia() {
   const frameClass =
     "relative mx-auto mt-14 w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.50)]";
 
-  // Before hydration settles, render the demo — it's a fully finished visual
-  // on its own, so there's no flash of an unstyled or empty hero.
   const showVideo = mounted && !!videoUrl && !videoFailed && !reducedMotion && !isMobile;
   const showImage = mounted && !showVideo && !!imageUrl && !imageFailed;
 
@@ -97,5 +94,5 @@ export function HeroMedia() {
     );
   }
 
-  return <HeroSystemDemo />;
+  return null;
 }

@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CTAButton } from "@/components/ui/cta-button";
-import { OrganicBlob } from "@/components/ui/organic-blob";
 import { trackEvent } from "@/lib/analytics";
 import { whatsappLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
@@ -26,7 +25,7 @@ export function ROICalculator() {
   );
 
   const fmt = (n: number) =>
-    new Intl.NumberFormat(locale === "es" ? "es-ES" : "en-US", {
+    new Intl.NumberFormat(locale === "es" ? "es-VE" : "en-US", {
       style: "currency", currency: "USD", maximumFractionDigits: 0,
     }).format(n);
 
@@ -41,19 +40,16 @@ export function ROICalculator() {
   }, [monthly]);
 
   return (
-    <section id="roi" className="relative overflow-hidden bg-section-cta py-24 sm:py-32">
-      <OrganicBlob variant="primary" className="left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2" slow />
-
+    <section id="roi" className="relative overflow-hidden bg-gray-50 py-24 sm:py-32">
       <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
           align="center"
           className="mb-12"
         />
 
-        <div className="glass-subtle overflow-hidden rounded-3xl border border-edge p-6 sm:p-10">
+        <div className="card-surface overflow-hidden rounded-2xl p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
             {/* Sliders */}
             <div className="space-y-8">
@@ -81,11 +77,11 @@ export function ROICalculator() {
             </div>
 
             {/* Result */}
-            <div className="flex flex-col items-center justify-center rounded-2xl bg-white/60 p-6 sm:p-8 text-center ring-1 ring-inset ring-cyan/20 w-full max-w-full overflow-hidden">
-              <p className="eyebrow">{t("resultLabel")}</p>
+            <div className="flex flex-col items-center justify-center rounded-2xl bg-white p-6 sm:p-8 text-center ring-1 ring-inset ring-cyan/20 w-full max-w-full overflow-hidden">
+              <p className="text-sm font-medium text-cyan-deep">{t("resultLabel")}</p>
               <div className="mt-4 flex w-full max-w-full items-center justify-center overflow-hidden px-1">
                 <p
-                  className="font-display font-extrabold leading-none tracking-tight text-cyan max-w-full whitespace-nowrap"
+                  className="font-display font-extrabold leading-none tracking-tight text-cyan tabular-nums max-w-full whitespace-nowrap"
                   style={{
                     fontSize:
                       fmt(monthly).length > 9
@@ -133,7 +129,7 @@ function Slider({
     <div>
       <div className="mb-2 flex items-center justify-between">
         <label className="text-sm font-medium text-ink">{label}</label>
-        <span className="font-mono text-sm font-semibold text-cyan">{display}</span>
+        <span className="text-sm font-semibold tabular-nums text-cyan-deep">{display}</span>
       </div>
       <input
         type="range"
@@ -143,10 +139,10 @@ function Slider({
           "h-2 w-full cursor-pointer appearance-none rounded-full",
           "[&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5",
           "[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full",
-          "[&::-webkit-slider-thumb]:bg-cyan [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(51,204,255,0.2)]",
+          "[&::-webkit-slider-thumb]:bg-cyan [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(0,196,240,0.2)]",
         )}
         style={{
-          background: `linear-gradient(to right, #33CCFF ${pct}%, #E5E7EB ${pct}%)`,
+          background: `linear-gradient(to right, #00C4F0 ${pct}%, #E5E7EB ${pct}%)`,
         }}
         aria-valuetext={display}
       />

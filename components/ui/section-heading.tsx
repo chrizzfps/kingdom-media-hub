@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "./reveal";
 
 /**
- * Standard section header: mono eyebrow + Jakarta display title + Geist sub.
+ * Standard section header: optional eyebrow + Cabinet display title + Satoshi sub.
  * dark prop: inverts colors for dark-background sections.
  */
 export function SectionHeading({
@@ -13,7 +13,7 @@ export function SectionHeading({
   dark = false,
   className,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: React.ReactNode;
   subtitle?: string;
   align?: "left" | "center";
@@ -28,12 +28,13 @@ export function SectionHeading({
         className,
       )}
     >
-      <Reveal>
-        <p className={cn("eyebrow flex items-center gap-2.5", align === "center" && "justify-center", dark && "text-white/50")}>
-          <span className="inline-block h-px w-5 bg-cyan/60" aria-hidden />
-          {eyebrow}
-        </p>
-      </Reveal>
+      {eyebrow && (
+        <Reveal>
+          <p className={cn("eyebrow", dark && "text-white/50")}>
+            {eyebrow}
+          </p>
+        </Reveal>
+      )}
       <Reveal delay={0.05}>
         <h2 className={cn(
           "mt-4 font-display text-balance font-bold leading-[1.05] tracking-tight",

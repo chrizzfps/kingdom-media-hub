@@ -4,18 +4,14 @@ import type { IconWeight } from "@phosphor-icons/react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
-import { OrganicBlob } from "@/components/ui/organic-blob";
 
 export function Ecosystem() {
   const t = useTranslations("ecosystem");
 
   return (
-    <section id="ecosystem" className="relative overflow-hidden bg-section-alt py-24 sm:py-32">
-      <OrganicBlob variant="soft" className="-right-40 top-20 h-[500px] w-[500px]" slow />
-
+    <section id="ecosystem" className="relative overflow-hidden bg-gray-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
           align="center"
@@ -47,11 +43,7 @@ export function Ecosystem() {
               variant="cyan"
               className="relative flex flex-[3] flex-col justify-between overflow-hidden p-9"
             >
-              <OrganicBlob
-                variant="soft"
-                className="left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2"
-              />
-              <div className="relative">
+              <div>
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/10">
                   <Lightning size={24} className="text-cyan" weight="duotone" />
                 </span>
@@ -62,7 +54,7 @@ export function Ecosystem() {
                   {t("coreDesc")}
                 </p>
               </div>
-              <EcosystemConnector />
+              <EcosystemFlow t={t} />
             </GlassCard>
           </div>
 
@@ -70,8 +62,7 @@ export function Ecosystem() {
           <div className="flex flex-col gap-4 lg:hidden">
             {/* Core first on mobile */}
             <GlassCard variant="cyan" className="relative overflow-hidden p-7">
-              <OrganicBlob variant="soft" className="right-0 top-0 h-48 w-48" />
-              <div className="relative">
+              <div>
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan/10">
                   <Lightning size={20} className="text-cyan" weight="duotone" />
                 </span>
@@ -137,30 +128,15 @@ function EngineCard({
   );
 }
 
-function EcosystemConnector() {
+function EcosystemFlow({ t }: { t: ReturnType<typeof useTranslations> }) {
+  const flow = (["agency", "mediaLab", "academy"] as const).map((key) => t(`${key}.tagline`));
   return (
-    <div className="relative mt-10">
-      <div className="flex items-center justify-between gap-2">
-        {["Agency", "Media Lab", "Academy"].map((label) => (
-          <div key={label} className="flex flex-col items-center gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-cyan/40" />
-            <span className="font-mono text-[0.6rem] uppercase tracking-wider text-muted/60">
-              {label}
-            </span>
-          </div>
-        ))}
-      </div>
-      <svg
-        className="absolute inset-x-0 top-1 w-full"
-        height="2"
-        viewBox="0 0 300 2"
-        fill="none"
-        aria-hidden
-      >
-        <line x1="0" y1="1" x2="300" y2="1" stroke="#33CCFF" strokeWidth="1" strokeDasharray="4 4" opacity="0.4">
-          <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite" />
-        </line>
-      </svg>
+    <div className="mt-10 flex divide-x divide-cyan/15 border-t border-cyan/15 pt-5">
+      {flow.map((label) => (
+        <p key={label} className="flex-1 px-3 text-center text-sm font-medium text-ink/70 first:pl-0 last:pr-0">
+          {label}
+        </p>
+      ))}
     </div>
   );
 }

@@ -4,11 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { ArrowRight, WhatsappLogo, CalendarCheck, EnvelopeSimple, Phone } from "@phosphor-icons/react";
+import { ArrowRight, WhatsappLogo, CalendarCheck, EnvelopeSimple, Phone, CheckCircle } from "@phosphor-icons/react";
 import { contactSchema, type ContactInput, revenueBands, projectTypes } from "@/lib/validations";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CTAButton } from "@/components/ui/cta-button";
-import { OrganicBlob } from "@/components/ui/organic-blob";
 import { trackEvent } from "@/lib/analytics";
 import { whatsappLink, calendlyLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
@@ -46,15 +45,12 @@ export function Contact() {
   const wa = whatsappLink(tcro("whatsappPrefill") ?? undefined);
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-section-cta py-24 sm:py-32">
-      <OrganicBlob variant="secondary" className="right-0 top-0 h-[400px] w-[400px]" slow />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <section id="contact" className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Left info */}
           <div>
             <SectionHeading
-              eyebrow={t("eyebrow")}
               title={t("title")}
               subtitle={t("subtitle")}
             />
@@ -102,11 +98,11 @@ export function Contact() {
           </div>
 
           {/* Form */}
-          <div className="glass-subtle rounded-3xl border border-edge p-6 sm:p-8">
+          <div className="card-surface rounded-2xl p-6 sm:p-8">
             {status === "success" ? (
               <div className="flex h-full items-center justify-center py-12 text-center">
                 <div>
-                  <span className="text-4xl">✓</span>
+                  <CheckCircle size={40} weight="fill" className="mx-auto text-cyan" />
                   <p className="mt-4 font-display text-lg font-semibold text-ink">{t("form.success")}</p>
                 </div>
               </div>

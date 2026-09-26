@@ -41,10 +41,9 @@
   --color-cyan-edge: rgba(0, 196, 240, 0.20);
 
   /* ── Typefaces (wired via next/font) ─────────────────────── */
-  --font-display: var(--font-jakarta), system-ui, sans-serif;
-  --font-serif: var(--font-serif), Georgia, Cambria, serif;
-  --font-sans: var(--font-geist), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 
   /* ── Motion ──────────────────────────────────────────────── */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
@@ -102,181 +101,78 @@ html.lenis body {
 /* ── Reusable utilities ────────────────────────────────────── */
 @layer utilities {
 
-  /* Light glassmorphism — Apple Vision Pro / Arc style */
-  .glass {
-    background: rgba(255, 255, 255, 0.60);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.80);
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.07),
-      0 1px 0 rgba(255, 255, 255, 0.90) inset;
-  }
-
-  /* Subtle glass — on white backgrounds */
-  .glass-subtle {
-    background: rgba(248, 250, 252, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Glass for dark sections */
-  .glass-dark {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
-  }
-
-  /* Eyebrow / mono label */
+  /* Eyebrow / section label */
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-cyan-deep);
   }
 
-  /* Cyan gradient text for emphasis words */
-  .text-cyan-gradient {
-    background: linear-gradient(120deg, var(--color-cyan), var(--color-cyan-deep));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Card surface — solid, tinted shadow, no blur */
+  .card-surface {
+    background: var(--color-white);
+    border: 1px solid var(--color-edge);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
   }
 
-  /* Dot grid backdrop */
-  .dot-grid {
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 20%, transparent 75%);
+  .card-surface-dark {
+    background: var(--color-dark-2);
+    border: 1px solid var(--color-glass-border-dark);
   }
 
-  /* Section background variants */
-  .bg-section-hero {
-    background:
-      radial-gradient(circle at 65% 0%, rgba(51, 204, 255, 0.13), transparent 52%),
-      radial-gradient(circle at 10% 80%, rgba(165, 233, 255, 0.08), transparent 45%),
-      linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  /* Glass for floating cards over dark/gradient sections */
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   }
 
-  .bg-section-alt {
-    background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F8FAFC 100%);
+  /* Client logo carousel — infinite scroll, pauses on hover */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
-
-  .bg-section-cta {
-    background:
-      radial-gradient(circle at 40% 50%, rgba(51, 204, 255, 0.09), transparent 60%),
-      #F8FAFC;
+  .marquee-track {
+    animation: marquee-scroll 28s linear infinite;
   }
-
-  /* Organic blob breathe animation */
-  .blob-breathe {
-    animation: blob-breathe 9s ease-in-out infinite;
-  }
-
-  .blob-breathe-slow {
-    animation: blob-breathe 13s ease-in-out infinite reverse;
+  .marquee-mask:hover .marquee-track {
+    animation-play-state: paused;
   }
 
   /* Float animation for hero cards */
-  .float-a {
-    animation: float-a 5s ease-in-out infinite;
-  }
-
-  .float-b {
-    animation: float-b 6s ease-in-out infinite 0.8s;
-  }
-
-  .float-c {
-    animation: float-c 7s ease-in-out infinite 1.6s;
-  }
-
-  .float-d {
-    animation: float-d 5.5s ease-in-out infinite 0.4s;
-  }
-
-  .float-e {
-    animation: float-e 6.5s ease-in-out infinite 1.2s;
-  }
+  .float-a { animation: float-a 5s ease-in-out infinite; }
+  .float-b { animation: float-b 6s ease-in-out infinite 0.8s; }
+  .float-c { animation: float-c 7s ease-in-out infinite 1.6s; }
+  .float-d { animation: float-d 5.5s ease-in-out infinite 0.4s; }
+  .float-e { animation: float-e 6.5s ease-in-out infinite 1.2s; }
 }
 
-/* ── Keyframes ─────────────────────────────────────────────── */
-@keyframes blob-breathe {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.70;
-  }
-
-  50% {
-    transform: scale(1.08);
-    opacity: 1.00;
-  }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
-
 @keyframes float-a {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(-1deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(1deg);
-  }
+  0%, 100% { transform: translateY(0px)   rotate(-1deg); }
+  50%       { transform: translateY(-12px) rotate(1deg); }
 }
-
 @keyframes float-b {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(1deg);
-  }
-
-  50% {
-    transform: translateY(-10px) rotate(-0.5deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(1deg); }
+  50%       { transform: translateY(-10px) rotate(-0.5deg); }
 }
-
 @keyframes float-c {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0.5deg);
-  }
-
-  50% {
-    transform: translateY(-14px) rotate(-1deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0.5deg); }
+  50%       { transform: translateY(-14px) rotate(-1deg); }
 }
-
 @keyframes float-d {
-
-  0%,
-  100% {
-    transform: translateY(-4px) rotate(-0.5deg);
-  }
-
-  50% {
-    transform: translateY(8px) rotate(1deg);
-  }
+  0%, 100% { transform: translateY(-4px) rotate(-0.5deg); }
+  50%       { transform: translateY(8px) rotate(1deg); }
 }
-
 @keyframes float-e {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(1deg);
-  }
-
-  50% {
-    transform: translateY(-11px) rotate(-0.5deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(1deg); }
+  50%       { transform: translateY(-11px) rotate(-0.5deg); }
 }
 
 /* ── Reduced motion ────────────────────────────────────────── */

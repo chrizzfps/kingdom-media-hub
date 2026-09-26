@@ -6,23 +6,21 @@ import { cn } from "@/lib/utils";
 /**
  * Liquid Intelligence button system.
  * primary  → cyan solid (CTAs, conversions)
- * secondary → light glass (alternative actions)
+ * secondary → light solid surface (alternative actions)
  * ghost    → text only with arrow (inline links)
  */
 const cta = cva(
-  "group inline-flex items-center justify-center gap-2 font-sans font-semibold tracking-tight transition-all duration-200 focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-60",
+  "group inline-flex items-center justify-center gap-2 font-sans font-semibold tracking-tight transition-all duration-200 focus-visible:outline-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60",
   {
     variants: {
       variant: {
         primary: [
           "rounded-full bg-cyan text-ink",
-          "shadow-[0_8px_24px_rgba(51,204,255,0.30)]",
-          "hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_12px_32px_rgba(51,204,255,0.45)]",
+          "hover:bg-cyan-deep hover:text-white",
         ],
         secondary: [
-          "rounded-full glass-subtle",
-          "border border-edge-strong text-ink",
-          "hover:-translate-y-0.5 hover:border-cyan/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]",
+          "rounded-full bg-gray-50 border border-edge-strong text-ink",
+          "hover:border-cyan/40 hover:bg-white",
         ],
         ghost: [
           "rounded-full text-ink hover:text-cyan",
@@ -30,11 +28,11 @@ const cta = cva(
         ],
         dark: [
           "rounded-full bg-ink text-white",
-          "hover:-translate-y-0.5 hover:bg-dark-2",
+          "hover:bg-dark-2",
         ],
         "outline-dark": [
           "rounded-full border border-white/30 bg-white/[0.06] text-white",
-          "hover:-translate-y-0.5 hover:border-cyan/50 hover:bg-white/10",
+          "hover:border-cyan/50 hover:bg-white/10",
         ],
       },
       size: {

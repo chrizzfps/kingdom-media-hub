@@ -12,12 +12,6 @@ import {
   AgencyWebsitesVisual,
 } from "./agency-visuals";
 
-const services = [
-  { key: "voice",      Icon: Robot },
-  { key: "automation", Icon: Lightning },
-  { key: "websites",   Icon: Browser, featured: true },
-] as const;
-
 type ServiceMedia = { imageUrl?: string; imageAlt?: string };
 type AgencyT = { has: (key: string) => boolean; raw: (key: string) => unknown };
 
@@ -38,16 +32,11 @@ export function Agency() {
   // before the CMS item existed — currently unused in production.
   const legacyWebsiteImageUrl = t.has("websites.imageUrl") ? t("websites.imageUrl") : undefined;
   const legacyWebsiteImageAlt = t.has("websites.imageAlt") ? t("websites.imageAlt") : undefined;
+  const voicePoints = t.raw("voice.points") as string[];
 
   return (
-    <section id="agency" className="relative overflow-hidden bg-white py-24 sm:py-32">
-      {/* Background subtle separation */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(249,250,251,0.6)_50%,transparent)]"
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <section id="agency" className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow={t("eyebrow")}
           title={t("title")}
@@ -55,69 +44,91 @@ export function Agency() {
           className="max-w-3xl"
         />
 
-        {/* Feature rows with bespoke visual art direction */}
-        <div className="mt-20 space-y-24 sm:mt-28 sm:space-y-32">
-          {services.map((svc, i) => {
-            const { key, Icon } = svc;
-            const featured = "featured" in svc && svc.featured === true;
-            const isReverse = i % 2 === 1;
+        {/* Featured: AI virtual assistant */}
+        <Reveal>
+          <div className="mt-16 grid items-center gap-10 sm:mt-20 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-5">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 border border-edge text-ink">
+                <Robot size={22} weight="duotone" className="text-cyan-deep" />
+              </span>
+              <p className="eyebrow mt-5">{t("voice.tagline")}</p>
+              <h3 className="mt-2.5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
+                {t("voice.name")}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                {t("voice.desc")}
+              </p>
+
+              <ul className="mt-6 space-y-3">
+                {voicePoints.map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-sm text-ink/80">
+                    <CheckCircle size={18} className="mt-0.5 shrink-0 text-cyan-deep" weight="duotone" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <CTAButton href={whatsappLink() ?? "#contact"} variant="primary" size="md">
+                  {tc("bookCall")}
+                </CTAButton>
+                <DemoButton />
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <AgencyVoiceVisual
+                imageUrl={voiceMedia.imageUrl}
+                imageAlt={voiceMedia.imageAlt}
+                label={t("voice.name")}
+              />
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Automation + Websites, side by side */}
+        <div className="mt-16 grid gap-8 sm:mt-20 lg:grid-cols-2 lg:gap-10">
+          {(
+            [
+              { key: "automation", Icon: Lightning, Visual: AgencyAutomationVisual, media: automationMedia },
+              {
+                key: "websites",
+                Icon: Browser,
+                Visual: AgencyWebsitesVisual,
+                media: { imageUrl: websitesMedia.imageUrl ?? legacyWebsiteImageUrl, imageAlt: websitesMedia.imageAlt ?? legacyWebsiteImageAlt },
+              },
+            ] as const
+          ).map(({ key, Icon, Visual, media }, i) => {
             const points = t.raw(`${key}.points`) as string[];
-
             return (
-              <Reveal key={key} delay={0.04}>
-                <div
-                  className={`grid items-center gap-10 lg:grid-cols-12 lg:gap-14 ${
-                    isReverse ? "lg:[&>:first-child]:order-last" : ""
-                  }`}
-                >
-                  {/* Text column (5 cols) */}
-                  <div className="lg:col-span-5">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 border border-edge text-ink">
-                      <Icon size={22} weight="duotone" className="text-cyan-deep" />
-                    </span>
-                    <p className="eyebrow mt-5 text-muted tracking-widest">{t(`${key}.tagline`)}</p>
-                    <h3 className="mt-2.5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
-                      {t(`${key}.name`)}
-                    </h3>
-                    <p className="mt-4 text-base leading-relaxed text-muted">
-                      {t(`${key}.desc`)}
-                    </p>
+              <Reveal key={key} delay={i * 0.06}>
+                <div>
+                  <Visual imageUrl={media.imageUrl} imageAlt={media.imageAlt} label={t(`${key}.name`)} />
 
-                    <ul className="mt-6 space-y-3">
-                      {points.map((point) => (
-                        <li key={point} className="flex items-start gap-3 text-sm text-ink/80">
-                          <CheckCircle
-                            size={18}
-                            className="mt-0.5 shrink-0 text-cyan-deep"
-                            weight="duotone"
-                          />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <span className="mt-6 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 border border-edge text-ink">
+                    <Icon size={22} weight="duotone" className="text-cyan-deep" />
+                  </span>
+                  <p className="eyebrow mt-5">{t(`${key}.tagline`)}</p>
+                  <h3 className="mt-2.5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                    {t(`${key}.name`)}
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-muted">
+                    {t(`${key}.desc`)}
+                  </p>
 
-                    <div className="mt-8 flex flex-wrap items-center gap-3">
-                      <CTAButton href={whatsappLink() ?? "#contact"} variant="primary" size="md">
-                        {tc("bookCall")}
-                      </CTAButton>
-                      {featured && <DemoButton />}
-                    </div>
-                  </div>
+                  <ul className="mt-6 space-y-3">
+                    {points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-sm text-ink/80">
+                        <CheckCircle size={18} className="mt-0.5 shrink-0 text-cyan-deep" weight="duotone" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                  {/* Visual column (7 cols) — Bespoke art direction */}
-                  <div className="lg:col-span-7">
-                    {key === "voice" && (
-                      <AgencyVoiceVisual imageUrl={voiceMedia.imageUrl} imageAlt={voiceMedia.imageAlt} />
-                    )}
-                    {key === "automation" && (
-                      <AgencyAutomationVisual imageUrl={automationMedia.imageUrl} imageAlt={automationMedia.imageAlt} />
-                    )}
-                    {key === "websites" && (
-                      <AgencyWebsitesVisual
-                        imageUrl={websitesMedia.imageUrl ?? legacyWebsiteImageUrl}
-                        imageAlt={websitesMedia.imageAlt ?? legacyWebsiteImageAlt}
-                      />
-                    )}
+                  <div className="mt-8">
+                    <CTAButton href={whatsappLink() ?? "#contact"} variant="primary" size="md">
+                      {tc("bookCall")}
+                    </CTAButton>
                   </div>
                 </div>
               </Reveal>

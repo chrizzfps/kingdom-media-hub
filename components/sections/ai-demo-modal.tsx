@@ -39,7 +39,7 @@ export function AIDemoModal() {
             aria-hidden
           />
           <motion.div
-            className="relative w-full max-w-xl rounded-3xl bg-white p-7 shadow-[0_32px_80px_rgba(0,0,0,0.14)]"
+            className="relative w-full max-w-xl rounded-2xl bg-white p-7 shadow-[0_32px_80px_rgba(0,0,0,0.14)]"
             initial={{ scale: 0.95, opacity: 0, y: 12 }}
             animate={{ scale: 1,    opacity: 1, y: 0  }}
             exit={{ scale: 0.95,    opacity: 0, y: 8  }}

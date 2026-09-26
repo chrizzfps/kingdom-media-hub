@@ -4,7 +4,6 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { Reveal } from "@/components/ui/reveal";
-import { OrganicBlob } from "@/components/ui/organic-blob";
 import { calendlyLink } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
@@ -17,10 +16,8 @@ export function Pricing() {
   const popularBadge = t("popularBadge");
 
   return (
-    <section id="pricing" className="relative overflow-hidden bg-section-cta py-24 sm:py-32">
-      <OrganicBlob variant="soft" className="left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2" />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <section id="pricing" className="bg-gray-50 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow={t("eyebrow")}
           title={t("title")}
@@ -36,13 +33,13 @@ export function Pricing() {
                 variant={plan.popular ? "cyan" : "subtle"}
                 className={cn(
                   "flex h-full flex-col justify-between p-7 sm:p-8",
-                  plan.popular && "ring-1 ring-cyan/20 shadow-[0_0_0_1px_rgba(51,204,255,0.15),0_20px_60px_rgba(51,204,255,0.08)]",
+                  plan.popular && "ring-1 ring-cyan/30",
                 )}
               >
                 <div className="flex flex-1 flex-col">
                   <div className="min-h-[28px] mb-3 flex items-center">
                     {plan.popular && (
-                      <span className="inline-flex rounded-full bg-cyan/10 px-3 py-1 font-mono text-xs font-semibold text-cyan">
+                      <span className="inline-flex rounded-full bg-cyan/10 px-3 py-1 text-xs font-semibold text-cyan-deep">
                         {popularBadge}
                       </span>
                     )}
@@ -51,11 +48,17 @@ export function Pricing() {
                   <p className="mt-1 text-sm text-muted">{plan.desc}</p>
 
                   <div className="mt-5 mb-6">
-                    <span className="font-display text-4xl font-extrabold tracking-tight text-ink">
-                      {plan.price}
-                    </span>
-                    {plan.priceSuffix && (
-                      <span className="ml-1 text-lg font-medium text-muted">{plan.priceSuffix}</span>
+                    {/^\d/.test(plan.price) ? (
+                      <>
+                        <span className="font-display text-4xl font-extrabold tabular-nums tracking-tight text-ink">
+                          {plan.price}
+                        </span>
+                        {plan.priceSuffix && (
+                          <span className="ml-1 text-lg font-medium text-muted">{plan.priceSuffix}</span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="text-sm font-semibold text-cyan-deep">{plan.price}</span>
                     )}
                   </div>
 

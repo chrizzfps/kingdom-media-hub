@@ -7,10 +7,9 @@ export function HowItWorks() {
   const steps = t.raw("steps") as Array<{ number: string; name: string; desc: string }>;
 
   return (
-    <section id="how-it-works" className="bg-section-alt py-24 sm:py-32">
+    <section id="how-it-works" className="bg-gray-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow={t("eyebrow")}
           title={t("title")}
           align="center"
           className="mb-16"
@@ -18,14 +17,11 @@ export function HowItWorks() {
 
         {/* Desktop: horizontal timeline */}
         <div className="hidden lg:block">
-          {/* Connecting line */}
-          <div className="relative mb-8 flex items-center justify-between">
-            <div className="absolute inset-x-0 top-5 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
+          <div className="relative mb-6 flex items-center justify-between">
+            <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-edge-strong" />
             {steps.map((step) => (
-              <div key={step.number} className="relative flex flex-col items-center" style={{ width: `${100 / steps.length}%` }}>
-                <span className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-cyan/30 bg-white font-mono text-sm font-bold text-cyan shadow-sm">
-                  {step.number}
-                </span>
+              <div key={step.number} className="relative flex justify-center" style={{ width: `${100 / steps.length}%` }}>
+                <span className="relative h-2.5 w-2.5 rounded-full bg-cyan" />
               </div>
             ))}
           </div>
@@ -45,11 +41,9 @@ export function HowItWorks() {
             <Reveal key={step.number} as="li" delay={i * 0.06}>
               <div className="flex gap-5">
                 <div className="flex flex-col items-center">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-cyan/30 bg-white font-mono text-sm font-bold text-cyan shadow-sm">
-                    {step.number}
-                  </span>
+                  <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-cyan" />
                   {i < steps.length - 1 && (
-                    <div className="mt-2 w-px flex-1 bg-gradient-to-b from-cyan/30 to-transparent" />
+                    <div className="mt-2 w-px flex-1 bg-edge-strong" />
                   )}
                 </div>
                 <div className="pb-8">
