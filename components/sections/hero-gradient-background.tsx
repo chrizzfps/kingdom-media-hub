@@ -1,11 +1,41 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
 
-export function HeroGradientBackground() {
+// Frames to wait before reporting ready: the first couple of frames can still be
+// compiling shaders / uploading textures, so wait until rendering has settled.
+const READY_AFTER_FRAMES = 3;
+
+function ReadySignal({ onReadyChange }: { onReadyChange?: (ready: boolean) => void }) {
+  const frames = useRef(0);
+  const reported = useRef(false);
+
+  useFrame(() => {
+    if (reported.current) return;
+    frames.current += 1;
+    if (frames.current >= READY_AFTER_FRAMES) {
+      reported.current = true;
+      onReadyChange?.(true);
+    }
+  });
+
+  // The canvas unmounts when scrolled far out of view (lazyLoad); reset so the
+  // parent fades it back in instead of popping when it remounts.
+  useEffect(() => () => onReadyChange?.(false), [onReadyChange]);
+
+  return null;
+}
+
+export function HeroGradientBackground({
+  onReadyChange,
+}: {
+  onReadyChange?: (ready: boolean) => void;
+}) {
   return (
     <ShaderGradientCanvas
-      style={{ position: "absolute", inset: 0, backgroundColor: "#000000" }}
+      style={{ position: "absolute", inset: 0 }}
       pointerEvents="none"
       pixelDensity={1}
       fov={45}
@@ -45,6 +75,7 @@ export function HeroGradientBackground() {
         uTime={0.2}
         wireframe={false}
       />
+      <ReadySignal onReadyChange={onReadyChange} />
     </ShaderGradientCanvas>
   );
 }

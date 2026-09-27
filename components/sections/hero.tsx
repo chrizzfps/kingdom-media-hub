@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -20,6 +21,7 @@ type HeroMediaFlags = { backgroundColor?: string };
 export function Hero() {
   const t = useTranslations("hero");
   const tc = useTranslations("common");
+  const [gradientReady, setGradientReady] = useState(false);
 
   const media: HeroMediaFlags | undefined = t.has("media") ? (t.raw("media") as HeroMediaFlags[])[0] : undefined;
   const backgroundColor = media?.backgroundColor || undefined;
@@ -30,14 +32,15 @@ export function Hero() {
       className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden bg-dark pt-28 pb-20 sm:pt-36 sm:pb-28"
       style={backgroundColor ? { backgroundColor } : undefined}
     >
+      {/* Fade in only once the WebGL canvas has actually painted — shader compile
+          takes ~1s, so a mount-time fade would finish on black and then pop. */}
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        animate={{ opacity: gradientReady ? 1 : 0 }}
+        transition={{ duration: gradientReady ? 1.6 : 0, ease: [0.22, 1, 0.36, 1] }}
       >
-        <HeroGradientBackground />
+        <HeroGradientBackground onReadyChange={setGradientReady} />
       </motion.div>
       <div className="absolute inset-0 z-[5] bg-black/45" />
 
