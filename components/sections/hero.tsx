@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "@phosphor-icons/react";
 import { CTAButton } from "@/components/ui/cta-button";
@@ -29,7 +30,15 @@ export function Hero() {
       className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden bg-dark pt-28 pb-20 sm:pt-36 sm:pb-28"
       style={backgroundColor ? { backgroundColor } : undefined}
     >
-      <HeroGradientBackground />
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <HeroGradientBackground />
+      </motion.div>
       <div className="absolute inset-0 z-[5] bg-black/45" />
 
       {/* Floating metric cards — anchored to the full section, not the text column,
