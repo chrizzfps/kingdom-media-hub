@@ -9,6 +9,8 @@ export function HeroGradientBackground() {
       pointerEvents="none"
       pixelDensity={1}
       fov={45}
+      threshold={0}
+      rootMargin="50% 0px 50% 0px"
     >
       <ShaderGradient
         animate="on"
