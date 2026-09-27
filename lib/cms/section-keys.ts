@@ -18,6 +18,7 @@ export const SECTION_KEYS = [
   "caseStudies",
   "socialProof",
   "comparison",
+  "manifesto",
   "faq",
   "pricing",
   "contact",

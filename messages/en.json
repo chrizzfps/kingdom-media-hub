@@ -433,6 +433,12 @@
       }
     ]
   },
+  "manifesto": {
+    "eyebrow": "Our philosophy",
+    "titleLine1": "Growth isn't luck.",
+    "titleAccent": "It's a system.",
+    "subtitle": "Every visit, every message and every appointment runs through a process built to convert. Nothing is left to chance."
+  },
   "faq": {
     "eyebrow": "FAQ",
     "title": "Everything you need to know before you start",

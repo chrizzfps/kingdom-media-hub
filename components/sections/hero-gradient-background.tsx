@@ -3,6 +3,15 @@
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
+import { setConsoleFunction } from "three";
+
+// @react-three/fiber 9.8 still creates a THREE.Clock per canvas, which three
+// r183+ flags as deprecated on every mount. Harmless until fiber moves to
+// THREE.Timer — drop just that warning and forward everything else untouched.
+setConsoleFunction((type, message, ...params) => {
+  if (message.startsWith("THREE.Clock: This module has been deprecated")) return;
+  console[type](message, ...params);
+});
 
 // Frames to wait before reporting ready: the first couple of frames can still be
 // compiling shaders / uploading textures, so wait until rendering has settled.

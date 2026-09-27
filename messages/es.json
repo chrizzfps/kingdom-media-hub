@@ -433,6 +433,12 @@
       }
     ]
   },
+  "manifesto": {
+    "eyebrow": "Nuestra filosofía",
+    "titleLine1": "El crecimiento no es suerte.",
+    "titleAccent": "Es un sistema.",
+    "subtitle": "Cada visita, cada mensaje y cada cita pasan por un proceso diseñado para convertir. Nada queda al azar."
+  },
   "faq": {
     "eyebrow": "Preguntas frecuentes",
     "title": "Todo lo que necesitas saber antes de empezar",
